@@ -1,0 +1,8 @@
+<stats>
+   <stat code="la" name="Left Axilla" count="9">40.9%</stat>
+   <stat code="ra" name="Right Axilla" count="20">90.9%</stat>
+   <stat code="pv" name="Paravertebral" count="3">13.6%</stat>
+   <stat code="lg" name="Left Groin" count="3">13.6%</stat>
+   <stat code="rg" name="Right Groin" count="1">4.5%</stat>
+   <stat code="in" name="Interval Node" count="4">18.2%</stat>
+</stats>

@@ -1,0 +1,8 @@
+<stats>
+   <stat code="ra" name="Right Axilla" count="31">91.2%</stat>
+   <stat code="rtis" name="Right TIS*" count="1">2.9%</stat>
+   <stat code="rc4" name="Right Cervical Level IV" count="1">2.9%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="4">11.8%</stat>
+   <stat code="rsc" name="Right Supraclavicular" count="8">23.5%</stat>
+   <stat code="in" name="Interval Node" count="1">2.9%</stat>
+</stats>

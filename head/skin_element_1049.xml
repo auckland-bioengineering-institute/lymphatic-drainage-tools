@@ -1,0 +1,8 @@
+<stats>
+   <stat code="lprea" name="Left Preauricular" count="1">50.0%</stat>
+   <stat code="rprea" name="Right Preauricular" count="2">100%</stat>
+   <stat code="lc1" name="Left Cervical Level I" count="1">50.0%</stat>
+   <stat code="rc1" name="Right Cervical Level I" count="2">100%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="1">50.0%</stat>
+   <stat code="in" name="Interval Node" count="1">50.0%</stat>
+</stats>

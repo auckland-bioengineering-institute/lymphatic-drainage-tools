@@ -1,0 +1,16 @@
+<stats>
+   <stat code="la" name="Left Axilla" count="1">5.9%</stat>
+   <stat code="ra" name="Right Axilla" count="5">29.4%</stat>
+   <stat code="rtis" name="Right TIS" count="1">5.9%</stat>
+   <stat code="lo" name="Left Occipital" count="1">5.9%</stat>
+   <stat code="ro" name="Right Occipital" count="3">17.6%</stat>
+   <stat code="rposta" name="Right Postauricular" count="1">5.9%</stat>
+   <stat code="lc2" name="Left Cervical Level II" count="1">5.9%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="3">17.6%</stat>
+   <stat code="rc3" name="Right Cervical Level III" count="1">5.9%</stat>
+   <stat code="lc5" name="Left Cervical Level V" count="2">11.8%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="8">47.1%</stat>
+   <stat code="lsc" name="Left Supraclavicular" count="2">11.8%</stat>
+   <stat code="rsc" name="Right Supraclavicular" count="7">41.2%</stat>
+   <stat code="in" name="Interval Node" count="4">23.5%</stat>
+</stats>

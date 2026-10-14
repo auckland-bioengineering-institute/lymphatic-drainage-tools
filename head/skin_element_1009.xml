@@ -1,0 +1,8 @@
+<stats>
+   <stat code="rprea" name="Right Preauricular" count="2">28.6%</stat>
+   <stat code="rc1" name="Right Cervical Level I" count="2">28.6%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="4">57.1%</stat>
+   <stat code="rc3" name="Right Cervical Level III" count="2">28.6%</stat>
+   <stat code="rc4" name="Right Cervical Level IV" count="1">14.3%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="2">28.6%</stat>
+</stats>

@@ -1,0 +1,9 @@
+<stats>
+   <stat code="la" name="Left Axilla" count="3">16.7%</stat>
+   <stat code="ra" name="Right Axilla" count="9">50.0%</stat>
+   <stat code="pv" name="Paravertebral" count="2">11.1%</stat>
+   <stat code="rp" name="Retroperitoneal" count="2">11.1%</stat>
+   <stat code="lg" name="Left Groin" count="3">16.7%</stat>
+   <stat code="rg" name="Right Groin" count="15">83.3%</stat>
+   <stat code="in" name="Interval Node" count="2">11.1%</stat>
+</stats>

@@ -1,0 +1,9 @@
+<stats>
+   <stat code="ro" name="Right Occipital" count="1">4.5%</stat>
+   <stat code="rprea" name="Right Preauricular" count="10">45.5%</stat>
+   <stat code="rposta" name="Right Postauricular" count="11">50.0%</stat>
+   <stat code="rc1" name="Right Cervical Level I" count="1">4.5%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="13">59.1%</stat>
+   <stat code="rc3" name="Right Cervical Level III" count="1">4.5%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="4">18.2%</stat>
+</stats>

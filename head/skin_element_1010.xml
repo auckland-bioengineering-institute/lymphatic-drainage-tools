@@ -1,0 +1,10 @@
+<stats>
+   <stat code="rprea" name="Right Preauricular" count="7">41.2%</stat>
+   <stat code="rc1" name="Right Cervical Level I" count="4">23.5%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="9">52.9%</stat>
+   <stat code="lc4" name="Left Cervical Level IV" count="1">5.9%</stat>
+   <stat code="rc4" name="Right Cervical Level IV" count="1">5.9%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="2">11.8%</stat>
+   <stat code="sm" name="Submental" count="1">5.9%</stat>
+   <stat code="in" name="Interval Node" count="2">11.8%</stat>
+</stats>

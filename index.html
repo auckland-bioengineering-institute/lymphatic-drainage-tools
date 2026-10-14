@@ -1,0 +1,807 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML><HEAD><TITLE>Melanoma - Skin Selection Tool</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1"/>    
+<meta id="SiteTitle_Description" name="description" content="3D visualisation of lymphatic drainage patterns in patients with cutaneous melanoma - as published in The Lancet Oncology"></meta>
+<meta id="SiteTitle_Keywords" name="keywords" content="3D visualisation of lymphatic drainage patterns in patients with cutaneous melanoma - as published in The Lancet Oncology"></meta>
+
+<LINK 
+media=all href="style.css" type=text/css 
+rel=stylesheet>
+<META content="MSHTML 6.00.2900.2604" name=GENERATOR>
+
+<SCRIPT type="text/javascript" src="exampleutils.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+
+	   /**
+             * Handler for servers response to skin_element_?.xml request.
+             * stats are pulled from skin_element_?.xml and replace the
+             * contents of the DIV with id 'statsSection'.
+             */
+            function statsResponseHandler()
+            {
+                // Make sure the request is loaded (readyState = 4)
+                if (req.readyState == 4)
+                {
+		    var tis_code = 0;
+			
+                    // Make sure the status is "OK"
+                    if (req.status == 200)
+                    {
+			var mytable=document.getElementById("statistics")
+			while (mytable.rows.length>1){ 	//deletes all rows of a table apart from top
+				mytable.deleteRow(-1) 	//delete first row of contracting table
+			}
+
+        		var swappableSection = document.getElementById('statistics');
+        		var stats = req.responseXML.getElementsByTagName('stat');
+			for (var i=0; i<stats.length; i++){	    //add new rows with content to the end of a table
+				var newrow = mytable.insertRow(-1)
+				var cellcode = newrow.insertCell(0) //insert new cells to row
+				var cellname = newrow.insertCell(1)
+				var cellcount = newrow.insertCell(2)
+				var cellpercent = newrow.insertCell(3)
+                        	for(j=0; j < stats.length; j++)
+                        	{
+                            		var statNode = stats.item(i);
+                            		if(statNode != null && statNode.hasChildNodes())
+						cellcode.innerHTML = statNode.getAttribute('code')
+						cellname.innerHTML = statNode.getAttribute('name')
+						cellcount.innerHTML = "<center>" + statNode.getAttribute('count') + "</center>"
+						cellpercent.innerHTML = "<center>" + statNode.firstChild.nodeValue + "</center>"
+						if(cellcode.innerHTML == 'ltis' || cellcode.innerHTML == 'rtis')
+							tis_code = 1
+				}
+		    	}
+			if(tis_code == 1)
+				document.getElementById("TIS_note").innerHTML = "* TIS = Triangular Intermuscular Space";
+			else
+				document.getElementById("TIS_note").innerHTML = "";
+		    }
+                    else {
+                        alert("There was a problem retrieving the XML data:\n" + req.statusText);
+                    }
+            	}
+	    }
+
+	var element = 490
+	var stats_on = 1
+
+	function displayPosteriorImage(element) {
+		document.image.src = "posterior_" + element + ".jpg"
+		if (stats_on)
+			xmlGet('skin_element_' + element + '.xml', statsResponseHandler)
+	}
+
+	function displayAnteriorImage(element) {
+		document.image.src = "anterior_" + element + ".jpg"
+		if (stats_on)
+			xmlGet('skin_element_' + element + '.xml', statsResponseHandler)
+	}
+
+	function changeImageAnterior() {
+		document.image.src = "anterior.jpg"
+		document.image.useMap = "#ANTERIOR_SKIN_ELEMENT"
+		document.getElementById("view_name").innerHTML = "Anterior view"
+
+		var mytable=document.getElementById("statistics")
+		while (mytable.rows.length>1){ 	//deletes all rows of a table apart from top
+			mytable.deleteRow(-1) 	//delete first row of contracting table
+		}
+	}
+
+	function changeImagePosterior() {
+		document.image.src = "posterior.jpg"
+		document.image.useMap = "#POSTERIOR_SKIN_ELEMENT"
+		document.getElementById("view_name").innerHTML = "Posterior view"
+
+		var mytable=document.getElementById("statistics")
+		while (mytable.rows.length>1){	//deletes all rows of a table apart from top
+			mytable.deleteRow(-1)   //delete first row of contracting table
+		}
+	}
+</SCRIPT>
+</HEAD>
+
+<BODY>
+
+<DIV class=main>
+<DIV class=head>
+<a href="http://www.mauricewilkinscentre.org/" target="blank"><img name="MWC_logo" SRC="MWC_logo_13.jpg" BORDER=0 align="right"></a>
+<DIV class=companyname>3D VISUALISATION OF LYMPHATIC DRAINAGE PATTERNS IN PATIENTS WITH CUTANEOUS MELANOMA</DIV>
+<DIV class=catchyphrase><a href="http://dx.doi.org/10.1016/S1470-2045(07)70176-6" target="blank">as published in The Lancet Oncology 2007 Sep;8(9):806-12</a></DIV>
+
+<DIV class=spacer>
+</DIV>
+</DIV>
+
+<DIV class=menu>
+<UL>
+  <LI><A href="index.html">SKIN SELECTION TOOL</A>
+  <LI><A href="heat_maps.html">Click here to view HEAT MAPS</A>
+  </LI></UL> 
+</DIV>
+
+<DIV class=contentTop></DIV>
+<DIV class=quotes></DIV>
+
+<DIV class=aboveContent>
+Researchers at The University of Auckland's Maurice Wilkins Centre have
+mapped melanoma lymphoscintigraphy data from the Sydney Melanoma Unit (SMU) onto a 3D anatomically based 
+computer model of the skin and lymph nodes. This mapped data has enabled visualisation of the likely node fields
+for melanoma metastasis.
+Data was mapped by <a href="http://www.abi.auckland.ac.nz/uoa/hayley-reynolds" target="blank">Dr Hayley Reynolds</a> at the Auckland Bioengineering Institute, supervised
+by Dr Nicolas Smith and Assoc Prof Rod Dunbar. Lymphoscintigraphy data from the SMU is courtesy of Prof Roger Uren MD and Prof John Thompson MD.<br>
+<br>
+<!--The mapped data can be viewed in two different displays. Click the 'Skin Selection Tool' option in the menubar above to view the potential sentinel lymph node fields
+by selecting different regions of skin. Alternatively, the 'Heat Map' option on the menubar shows various heat maps visualising the
+percentage likelihood that the skin will show lymphatic drainage to a specified node field.
+<br>
+<br>-->
+
+<STRONG>SKIN SELECTION TOOL:</STRONG><br>
+Click on regions of skin on the image below to display the potential sentinel lymph node fields that will receive melanoma cells if the cancer has spread
+beyond the skin. The node fields displayed are scaled in size according to the drainage likelihood, and the total number of patient cases
+are displayed on the selected skin regions. The table of statistics details the number of patient cases draining to each node field and the
+percentage likelihood of drainage to that node field.<br>
+<DIV class=spacer></DIV>
+
+</DIV>
+
+
+<table border="0" width="100%" cellpadding="10">
+
+<tr>
+<td valign="top" align="center">
+<DIV class=content><center>
+<img name="image" SRC="posterior_490.jpg" width="383" height="548" BORDER=0 ALIGN="middle" ISMAP usemap="#POSTERIOR_SKIN_ELEMENT"></a></h4>
+<DIV class=spacer></DIV>
+<div ID="view_name">Posterior view</div>
+<center>
+
+<DIV class=spacer></DIV>
+<DIV class=spacer></DIV>
+
+<center>Change views:
+<input type=button value="Anterior" onClick="changeImageAnterior()">
+<input type=button value="Posterior" onClick="changeImagePosterior()">
+</center>
+
+</td>
+
+</DIV>
+
+<td valign="top" align="right">
+<DIV class=rightColumn>
+
+
+<!--<DIV class=spacer></DIV>
+<DIV class=spacer></DIV>-->
+
+<STRONG>STATISTICS:</STRONG><br>
+<DIV class=spacerGreen></DIV>
+<table id="statistics" cellspacing="0" cellpadding="2" align="left">
+<tr>
+<th>Code<br><img src="images/tableSpacer.gif" width="40" height="1"></th>
+<th>Nodefield<br><img src="images/tableSpacer.gif" width="150" height="1"></th>
+<th><center># Cases</center><img src="images/tableSpacer.gif" width="60" height="1"></th>
+<th><center>Drainage</center><img src="images/tableSpacer.gif" width="70" height="1"></th>
+</tr>
+<tr>
+<td>la</td>
+<td>Left Axilla</td>
+<td><center>15</center></td>
+<td><center>71.4%</center></td>
+</tr>
+<tr>
+<td>ra</td>
+<td>Right Axilla</td>
+<td><center>11</center></td>
+<td><center>52.4%</center></td>
+</tr>
+<tr>
+<td>inc</td>
+<td>Intercostal</td>
+<td><center>1</center></td>
+<td><center>4.8%</center></td>
+</tr>
+<tr>
+<td>pv</td>
+<td>Paravertebral</td>
+<td><center>1</center></td>
+<td><center>4.8%</center></td>
+</tr>
+<tr>
+<td>rp</td>
+<td>Retroperitoneal</td>
+<td><center>1</center></td>
+<td><center>4.8%</center></td>
+</tr>
+<tr>
+<td>lg</td>
+<td>Left Groin</td>
+<td><center>14</center></td>
+<td><center>66.7%</center></td>
+</tr>
+<tr>
+<td>rg</td>
+<td>Right Groin</td>
+<td><center>5</center></td>
+<td><center>23.8%</center></td>
+</tr>
+<tr>
+<td>in</td>
+<td>Interval Node</td>
+<td><center>2</center></td>
+<td><center>9.5%</center></td>
+</tr>
+</table>
+<br>
+
+<DIV class=spacer></DIV>
+<DIV class=spacerGreen></DIV>
+<DIV class=spacer></DIV>
+
+<div ID="TIS_note"> </div>
+<!--TIS_note* TIS = Triangular Intermuscular Space-->
+
+<DIV class=spacer></DIV>
+
+<br/>
+
+<!--<center><STRONG>VIEW LYMPHATIC DRAINAGE PATTERNS OF THE:</STRONG></center>
+
+<center>
+<table border="0">
+<tr>
+<td><FORM METHOD="GET" ACTION="head/index.html"><INPUT TYPE="submit" VALUE="Head & Neck"></FORM></td>
+<td><FORM METHOD="GET" ACTION="breast/index.html"><INPUT TYPE="submit" VALUE="Breast"></FORM></td>
+</tr>
+</table> 
+</center>
+<br>-->
+
+</td>
+</tr>
+
+</table>
+
+<DIV class=contentTop></DIV>
+
+<p>
+<center>
+<table border="0">
+<tr>
+<td><STRONG>VIEW LYMPHATIC DRAINAGE PATTERNS OF THE:</STRONG></td>
+<td><FORM METHOD="GET" ACTION="head/index.html"><INPUT TYPE="submit" VALUE="Head & Neck"></FORM></td>
+<td><FORM METHOD="GET" ACTION="breast/index.html"><INPUT TYPE="submit" VALUE="Breast"></FORM></td>
+</tr>
+</table> 
+</center>
+<DIV class=spacer></DIV>
+</p>
+
+<center>
+<p>
+<b>Any questions or comments please email <a href="http://www.abi.auckland.ac.nz/uoa/hayley-reynolds" target="blank">Dr Hayley Reynolds</a> at <a href="mailto:h.reynolds@auckland.ac.nz">h.reynolds@auckland.ac.nz</a></b>
+</p>
+</center>
+
+
+<DIV class=contentTop></DIV>
+<center>
+
+<DIV class=spacer></DIV>
+<!--<img src="images/all_logos.jpg">-->
+<!--<a href="http://www.bioeng.auckland.ac.nz/"><img border="0" src="images/all_logos_bio.jpg"></a>-->
+<a href="http://www.abi.auckland.ac.nz/" target="blank"><img border="0" src="images/abi-logo-positive-rgb.jpg" height="60"></a>
+<img src="images/all_logos_spacer.jpg">
+<a href="http://www.sydneycancer.com.au/" target="blank"><img border="0" src="images/all_logos_scc.jpg"></a>
+<img src="images/all_logos_spacer.jpg">
+<a href="http://www.mauricewilkinscentre.org/" target="blank"><img border="0" src="images/all_logos_mwc.jpg"></a>
+<DIV class=spacer></DIV>
+
+</center>
+
+</DIV>
+
+<map name="POSTERIOR_SKIN_ELEMENT">
+
+	<area shape="polygon" coords="117,524,163,523,157,496,116,496,117,524" href="javascript:displayPosteriorImage(249)">
+	<area shape="polygon" coords="163,523,186,524,187,496,157,496,163,523" href="javascript:displayPosteriorImage(250)">
+	<area shape="polygon" coords="187,524,214,524,221,496,187,496,187,524" href="javascript:displayPosteriorImage(251)">
+	<area shape="polygon" coords="214,524,261,523,264,496,221,496,214,524" href="javascript:displayPosteriorImage(252)">
+	<area shape="polygon" coords="91,195,121,195,120,168,85,169,91,195" href="javascript:displayPosteriorImage(256)">
+	<area shape="polygon" coords="45,170,42,170,60,142,47,141,45,170" href="javascript:displayPosteriorImage(261)">
+	<area shape="polygon" coords="42,170,63,170,60,142,42,170" href="javascript:displayPosteriorImage(262)">
+	<area shape="polygon" coords="85,169,63,170,60,142,85,169" href="javascript:displayPosteriorImage(263)">
+	<area shape="polygon" coords="85,169,120,168,122,141,60,142,85,169" href="javascript:displayPosteriorImage(264)">
+	<area shape="polygon" coords="256,195,293,195,301,169,258,168,256,195" href="javascript:displayPosteriorImage(265)">
+	<area shape="polygon" coords="258,168,301,169,311,141,260,141,258,168" href="javascript:displayPosteriorImage(269)">
+	<area shape="polygon" coords="301,169,322,170,311,141,301,169" href="javascript:displayPosteriorImage(270)">
+	<area shape="polygon" coords="343,170,322,170,311,141,343,170" href="javascript:displayPosteriorImage(271)">
+	<area shape="polygon" coords="343,170,341,170,337,141,311,141,343,170" href="javascript:displayPosteriorImage(272)">
+	<area shape="polygon" coords="72,524,83,523,82,496,72,496,72,524" href="javascript:displayPosteriorImage(377)">
+	<area shape="polygon" coords="83,523,117,524,116,496,82,496,83,523" href="javascript:displayPosteriorImage(378)">
+	<area shape="polygon" coords="261,523,291,524,294,496,264,496,261,523" href="javascript:displayPosteriorImage(383)">
+	<area shape="polygon" coords="291,524,302,524,303,496,294,496,291,524" href="javascript:displayPosteriorImage(384)">
+	<area shape="polygon" coords="72,496,82,496,82,469,74,469,72,496" href="javascript:displayPosteriorImage(391)">
+	<area shape="polygon" coords="82,496,116,496,115,469,82,469,82,496" href="javascript:displayPosteriorImage(392)">
+	<area shape="polygon" coords="116,496,157,496,154,469,115,469,116,496" href="javascript:displayPosteriorImage(393)">
+	<area shape="polygon" coords="157,496,187,496,190,469,154,469,157,496" href="javascript:displayPosteriorImage(394)">
+	<area shape="polygon" coords="187,496,221,496,228,469,190,469,187,496" href="javascript:displayPosteriorImage(395)">
+	<area shape="polygon" coords="221,496,264,496,268,469,228,469,221,496" href="javascript:displayPosteriorImage(396)">
+	<area shape="polygon" coords="264,496,294,496,296,469,268,469,264,496" href="javascript:displayPosteriorImage(397)">
+	<area shape="polygon" coords="294,496,303,496,300,469,296,469,294,496" href="javascript:displayPosteriorImage(398)">
+	<area shape="polygon" coords="82,469,115,469,114,441,79,442,82,469" href="javascript:displayPosteriorImage(408)">
+	<area shape="polygon" coords="115,469,154,469,152,442,114,441,115,469" href="javascript:displayPosteriorImage(409)">
+	<area shape="polygon" coords="154,469,190,469,190,442,152,442,154,469" href="javascript:displayPosteriorImage(410)">
+	<area shape="polygon" coords="190,469,228,469,230,441,190,442,190,469" href="javascript:displayPosteriorImage(411)">
+	<area shape="polygon" coords="228,469,268,469,271,441,230,441,228,469" href="javascript:displayPosteriorImage(412)">
+	<area shape="polygon" coords="268,469,296,469,299,441,271,441,268,469" href="javascript:displayPosteriorImage(413)">
+	<area shape="polygon" coords="79,442,114,441,114,414,80,414,79,442" href="javascript:displayPosteriorImage(424)">
+	<area shape="polygon" coords="114,441,152,442,152,414,114,414,114,441" href="javascript:displayPosteriorImage(425)">
+	<area shape="polygon" coords="152,442,190,442,189,414,152,414,152,442" href="javascript:displayPosteriorImage(426)">
+	<area shape="polygon" coords="190,442,230,441,230,414,189,414,190,442" href="javascript:displayPosteriorImage(427)">
+	<area shape="polygon" coords="230,441,271,441,271,414,230,414,230,441" href="javascript:displayPosteriorImage(428)">
+	<area shape="polygon" coords="271,441,299,441,298,414,271,414,271,441" href="javascript:displayPosteriorImage(429)">
+	<area shape="polygon" coords="80,414,114,414,115,387,85,387,80,414" href="javascript:displayPosteriorImage(440)">
+	<area shape="polygon" coords="114,414,152,414,151,387,115,387,114,414" href="javascript:displayPosteriorImage(441)">
+	<area shape="polygon" coords="152,414,189,414,189,387,151,387,152,414" href="javascript:displayPosteriorImage(442)">
+	<area shape="polygon" coords="189,414,230,414,231,387,189,387,189,414" href="javascript:displayPosteriorImage(443)">
+	<area shape="polygon" coords="230,414,271,414,269,387,231,387,230,414" href="javascript:displayPosteriorImage(444)">
+	<area shape="polygon" coords="271,414,298,414,291,387,269,387,271,414" href="javascript:displayPosteriorImage(445)">
+	<area shape="polygon" coords="85,387,115,387,116,359,90,359,85,387" href="javascript:displayPosteriorImage(456)">
+	<area shape="polygon" coords="115,387,151,387,150,359,116,359,115,387" href="javascript:displayPosteriorImage(457)">
+	<area shape="polygon" coords="151,387,189,387,189,359,150,359,151,387" href="javascript:displayPosteriorImage(458)">
+	<area shape="polygon" coords="189,387,231,387,231,360,189,359,189,387" href="javascript:displayPosteriorImage(459)">
+	<area shape="polygon" coords="231,387,269,387,266,359,231,360,231,387" href="javascript:displayPosteriorImage(460)">
+	<area shape="polygon" coords="269,387,291,387,284,359,266,359,269,387" href="javascript:displayPosteriorImage(461)">
+	<area shape="polygon" coords="90,359,116,359,117,332,92,332,90,359" href="javascript:displayPosteriorImage(472)">
+	<area shape="polygon" coords="116,359,150,359,150,332,117,332,116,359" href="javascript:displayPosteriorImage(473)">
+	<area shape="polygon" coords="150,359,189,359,189,332,150,332,150,359" href="javascript:displayPosteriorImage(474)">
+	<area shape="polygon" coords="189,359,231,360,231,332,189,332,189,359" href="javascript:displayPosteriorImage(475)">
+	<area shape="polygon" coords="231,360,266,359,267,332,231,332,231,360" href="javascript:displayPosteriorImage(476)">
+	<area shape="polygon" coords="266,359,284,359,283,332,267,332,266,359" href="javascript:displayPosteriorImage(477)">
+	<area shape="polygon" coords="92,332,117,332,120,305,99,305,92,332" href="javascript:displayPosteriorImage(488)">
+	<area shape="polygon" coords="117,332,150,332,150,305,120,305,117,332" href="javascript:displayPosteriorImage(489)">
+	<area shape="polygon" coords="150,332,189,332,189,305,150,305,150,332" href="javascript:displayPosteriorImage(490)">
+	<area shape="polygon" coords="189,332,231,332,231,305,189,305,189,332" href="javascript:displayPosteriorImage(491)">
+	<area shape="polygon" coords="231,332,267,332,264,305,231,305,231,332" href="javascript:displayPosteriorImage(492)">
+	<area shape="polygon" coords="267,332,283,332,279,305,264,305,267,332" href="javascript:displayPosteriorImage(493)">
+	<area shape="polygon" coords="99,305,120,305,118,278,101,278,99,305" href="javascript:displayPosteriorImage(504)">
+	<area shape="polygon" coords="120,305,150,305,148,277,118,278,120,305" href="javascript:displayPosteriorImage(505)">
+	<area shape="polygon" coords="150,305,189,305,189,277,148,277,150,305" href="javascript:displayPosteriorImage(506)">
+	<area shape="polygon" coords="189,305,231,305,233,277,189,277,189,305" href="javascript:displayPosteriorImage(507)">
+	<area shape="polygon" coords="231,305,264,305,266,277,233,277,231,305" href="javascript:displayPosteriorImage(508)">
+	<area shape="polygon" coords="264,305,279,305,278,277,266,277,264,305" href="javascript:displayPosteriorImage(509)">
+	<area shape="polygon" coords="101,278,118,278,105,250,96,250,101,278" href="javascript:displayPosteriorImage(520)">
+	<area shape="polygon" coords="118,278,148,277,138,250,105,250,118,278" href="javascript:displayPosteriorImage(521)">
+	<area shape="polygon" coords="148,277,189,277,189,250,138,250,148,277" href="javascript:displayPosteriorImage(522)">
+	<area shape="polygon" coords="189,277,233,277,240,250,189,250,189,277" href="javascript:displayPosteriorImage(523)">
+	<area shape="polygon" coords="233,277,266,277,275,250,240,250,233,277" href="javascript:displayPosteriorImage(524)">
+	<area shape="polygon" coords="266,277,278,277,283,250,275,250,266,277" href="javascript:displayPosteriorImage(525)">
+	<area shape="polygon" coords="96,250,105,250,95,223,94,223,96,250" href="javascript:displayPosteriorImage(536)">
+	<area shape="polygon" coords="105,250,138,250,127,223,95,223,105,250" href="javascript:displayPosteriorImage(537)">
+	<area shape="polygon" coords="138,250,189,250,189,223,127,223,138,250" href="javascript:displayPosteriorImage(538)">
+	<area shape="polygon" coords="189,250,240,250,251,223,189,223,189,250" href="javascript:displayPosteriorImage(539)">
+	<area shape="polygon" coords="240,250,275,250,285,223,251,223,240,250" href="javascript:displayPosteriorImage(540)">
+	<area shape="polygon" coords="275,250,283,250,286,223,285,223,275,250" href="javascript:displayPosteriorImage(541)">
+	<area shape="polygon" coords="95,223,127,223,121,195,91,195,95,223" href="javascript:displayPosteriorImage(553)">
+	<area shape="polygon" coords="127,223,189,223,190,195,121,195,127,223" href="javascript:displayPosteriorImage(554)">
+	<area shape="polygon" coords="189,223,251,223,256,195,190,195,189,223" href="javascript:displayPosteriorImage(555)">
+	<area shape="polygon" coords="251,223,285,223,293,195,256,195,251,223" href="javascript:displayPosteriorImage(556)">
+	<area shape="polygon" coords="47,141,60,142,69,112,58,113,47,141" href="javascript:displayPosteriorImage(574)">
+	<area shape="polygon" coords="60,142,122,141,124,113,69,112,60,142" href="javascript:displayPosteriorImage(575)">
+	<area shape="polygon" coords="122,141,189,141,190,113,124,113,122,141" href="javascript:displayPosteriorImage(576)">
+	<area shape="polygon" coords="189,141,260,141,252,113,190,113,189,141" href="javascript:displayPosteriorImage(577)">
+	<area shape="polygon" coords="260,141,311,141,302,113,252,113,260,141" href="javascript:displayPosteriorImage(578)">
+	<area shape="polygon" coords="311,141,337,141,324,112,302,113,311,141" href="javascript:displayPosteriorImage(579)">
+	<area shape="polygon" coords="58,113,69,112,106,86,116,86,58,113" href="javascript:displayPosteriorImage(590)">
+	<area shape="polygon" coords="69,112,124,113,138,86,106,86,69,112" href="javascript:displayPosteriorImage(591)">
+	<area shape="polygon" coords="124,113,190,113,190,86,138,86,124,113" href="javascript:displayPosteriorImage(592)">
+	<area shape="polygon" coords="190,113,252,113,239,86,190,86,190,113" href="javascript:displayPosteriorImage(593)">
+	<area shape="polygon" coords="252,113,302,113,267,86,239,86,252,113" href="javascript:displayPosteriorImage(594)">
+	<area shape="polygon" coords="302,113,324,112,258,86,267,86,302,113" href="javascript:displayPosteriorImage(595)">
+	<area shape="polygon" coords="121,195,190,195,189,168,120,168,121,195" href="javascript:displayPosteriorImage(604)">
+	<area shape="polygon" coords="190,195,256,195,258,168,189,168,190,195" href="javascript:displayPosteriorImage(605)">
+	<area shape="polygon" coords="120,168,189,168,189,141,122,141,120,168" href="javascript:displayPosteriorImage(606)">
+	<area shape="polygon" coords="189,168,258,168,260,141,189,141,189,168" href="javascript:displayPosteriorImage(607)">
+	<area shape="polygon" coords="14,379,26,378,32,327,19,329,14,379" href="javascript:displayPosteriorImage(707)">
+	<area shape="polygon" coords="26,378,40,376,53,327,32,327,26,378" href="javascript:displayPosteriorImage(708)">
+	<area shape="polygon" coords="40,376,49,377,68,333,53,327,40,376" href="javascript:displayPosteriorImage(709)">
+	<area shape="polygon" coords="19,329,32,327,35,265,31,273,19,329" href="javascript:displayPosteriorImage(715)">
+	<area shape="polygon" coords="32,327,53,327,60,268,35,265,32,327" href="javascript:displayPosteriorImage(716)">
+	<area shape="polygon" coords="53,327,68,333,83,275,60,268,53,327" href="javascript:displayPosteriorImage(717)">
+	<area shape="polygon" coords="35,265,60,268,65,220,38,220,35,265" href="javascript:displayPosteriorImage(724)">
+	<area shape="polygon" coords="60,268,83,275,93,217,65,220,60,268" href="javascript:displayPosteriorImage(725)">
+	<area shape="polygon" coords="83,275,82,276,94,217,93,217,83,275" href="javascript:displayPosteriorImage(726)">
+	<area shape="polygon" coords="38,220,65,220,63,170,42,170,38,220" href="javascript:displayPosteriorImage(732)">
+	<area shape="polygon" coords="65,220,93,217,85,169,63,170,65,220" href="javascript:displayPosteriorImage(733)">
+	<area shape="polygon" coords="336,377,345,376,333,327,317,333,336,377" href="javascript:displayPosteriorImage(860)">
+	<area shape="polygon" coords="345,376,359,378,353,327,333,327,345,376" href="javascript:displayPosteriorImage(861)">
+	<area shape="polygon" coords="359,378,371,379,366,329,353,327,359,378" href="javascript:displayPosteriorImage(862)">
+	<area shape="polygon" coords="317,333,333,327,325,268,302,275,317,333" href="javascript:displayPosteriorImage(868)">
+	<area shape="polygon" coords="333,327,353,327,350,265,325,268,333,327" href="javascript:displayPosteriorImage(869)">
+	<area shape="polygon" coords="353,327,366,329,354,273,350,265,353,327" href="javascript:displayPosteriorImage(870)">
+	<area shape="polygon" coords="303,276,302,275,292,217,291,217,303,276" href="javascript:displayPosteriorImage(875)">
+	<area shape="polygon" coords="302,275,325,268,320,220,292,217,302,275" href="javascript:displayPosteriorImage(876)">
+	<area shape="polygon" coords="325,268,350,265,347,220,320,220,325,268" href="javascript:displayPosteriorImage(877)">
+	<area shape="polygon" coords="292,217,320,220,322,170,301,169,292,217" href="javascript:displayPosteriorImage(884)">
+	<area shape="polygon" coords="320,220,347,220,343,170,322,170,320,220" href="javascript:displayPosteriorImage(885)">
+
+	<area shape="polygon" coords="74,551,88,551,83,523,72,524,74,551" href="javascript:displayPosteriorImage(321)">
+	<area shape="polygon" coords="88,551,119,551,117,524,83,523,88,551" href="javascript:displayPosteriorImage(322)">
+	<area shape="polygon" coords="119,551,160,551,163,523,117,524,119,551" href="javascript:displayPosteriorImage(323)">
+	<area shape="polygon" coords="160,551,185,551,186,524,163,523,160,551" href="javascript:displayPosteriorImage(324)">
+	<area shape="polygon" coords="191,551,217,551,214,524,187,524,191,551" href="javascript:displayPosteriorImage(369)">
+	<area shape="polygon" coords="217,551,260,551,261,523,214,524,217,551" href="javascript:displayPosteriorImage(370)">
+	<area shape="polygon" coords="260,551,288,551,291,524,261,523,260,551" href="javascript:displayPosteriorImage(371)">
+	<area shape="polygon" coords="288,551,300,551,302,524,291,524,288,551" href="javascript:displayPosteriorImage(372)">
+	<area shape="polygon" coords="32,487,31,482,33,482,32,487" href="javascript:displayPosteriorImage(611)">
+	<area shape="polygon" coords="32,487,31,482,28,485,32,487" href="javascript:displayPosteriorImage(614)">
+	<area shape="polygon" coords="31,482,33,482,28,473,25,470,31,482" href="javascript:displayPosteriorImage(615)">
+	<area shape="polygon" coords="28,485,31,482,25,470,19,473,28,485" href="javascript:displayPosteriorImage(618)">
+	<area shape="polygon" coords="25,470,28,473,29,463,23,459,25,470" href="javascript:displayPosteriorImage(619)">
+	<area shape="polygon" coords="19,473,25,470,23,459,16,461,19,473" href="javascript:displayPosteriorImage(622)">
+	<area shape="polygon" coords="48,495,44,491,49,491,48,495" href="javascript:displayPosteriorImage(623)">
+	<area shape="polygon" coords="48,495,44,491,43,494,48,495" href="javascript:displayPosteriorImage(626)">
+	<area shape="polygon" coords="44,491,49,491,36,479,33,478,44,491" href="javascript:displayPosteriorImage(627)">
+	<area shape="polygon" coords="43,494,44,491,33,478,29,482,43,494" href="javascript:displayPosteriorImage(630)">
+	<area shape="polygon" coords="33,478,36,479,34,467,29,463,33,478" href="javascript:displayPosteriorImage(631)">
+	<area shape="polygon" coords="61,494,57,490,61,489,61,494" href="javascript:displayPosteriorImage(635)">
+	<area shape="polygon" coords="61,494,57,490,56,495,61,494" href="javascript:displayPosteriorImage(638)">
+	<area shape="polygon" coords="57,490,61,489,46,482,42,481,57,490" href="javascript:displayPosteriorImage(639)">
+	<area shape="polygon" coords="42,481,46,482,40,467,34,467,42,481" href="javascript:displayPosteriorImage(643)">
+	<area shape="polygon" coords="65,490,61,487,64,486,65,490" href="javascript:displayPosteriorImage(647)">
+	<area shape="polygon" coords="61,487,64,486,52,475,46,479,61,487" href="javascript:displayPosteriorImage(651)">
+	<area shape="polygon" coords="46,479,52,475,47,465,40,467,46,479" href="javascript:displayPosteriorImage(655)">
+	<area shape="polygon" coords="60,476,58,469,64,468,60,476" href="javascript:displayPosteriorImage(659)">
+	<area shape="polygon" coords="60,476,58,469,54,472,60,476" href="javascript:displayPosteriorImage(662)">
+	<area shape="polygon" coords="58,469,64,468,62,458,55,458,58,469" href="javascript:displayPosteriorImage(663)">
+	<area shape="polygon" coords="54,472,58,469,55,458,52,461,54,472" href="javascript:displayPosteriorImage(666)">
+	<area shape="polygon" coords="55,458,62,458,60,446,52,448,55,458" href="javascript:displayPosteriorImage(667)">
+	<area shape="polygon" coords="52,461,55,458,52,448,47,451,52,461" href="javascript:displayPosteriorImage(670)">
+	<area shape="polygon" coords="23,459,29,463,32,446,26,444,23,459" href="javascript:displayPosteriorImage(671)">
+	<area shape="polygon" coords="29,463,34,467,37,451,32,446,29,463" href="javascript:displayPosteriorImage(672)">
+	<area shape="polygon" coords="34,467,40,467,44,451,37,451,34,467" href="javascript:displayPosteriorImage(673)">
+	<area shape="polygon" coords="40,467,47,465,52,448,44,451,40,467" href="javascript:displayPosteriorImage(674)">
+	<area shape="polygon" coords="16,461,23,459,26,444,16,448,16,461" href="javascript:displayPosteriorImage(680)">
+	<area shape="polygon" coords="52,448,60,446,57,431,52,430,52,448" href="javascript:displayPosteriorImage(681)">
+	<area shape="polygon" coords="16,448,26,444,26,428,15,430,16,448" href="javascript:displayPosteriorImage(688)">
+	<area shape="polygon" coords="26,444,32,446,35,428,26,428,26,444" href="javascript:displayPosteriorImage(689)">
+	<area shape="polygon" coords="32,446,37,451,39,430,35,428,32,446" href="javascript:displayPosteriorImage(690)">
+	<area shape="polygon" coords="37,451,44,451,45,430,39,430,37,451" href="javascript:displayPosteriorImage(691)">
+	<area shape="polygon" coords="44,451,52,448,52,430,45,430,44,451" href="javascript:displayPosteriorImage(692)">
+	<area shape="polygon" coords="52,430,57,431,43,411,42,411,52,430" href="javascript:displayPosteriorImage(693)">
+	<area shape="polygon" coords="15,430,26,428,21,414,14,416,15,430" href="javascript:displayPosteriorImage(700)">
+	<area shape="polygon" coords="26,428,35,428,31,413,21,414,26,428" href="javascript:displayPosteriorImage(701)">
+	<area shape="polygon" coords="35,428,39,430,37,413,31,413,35,428" href="javascript:displayPosteriorImage(702)">
+	<area shape="polygon" coords="39,430,45,430,40,412,37,413,39,430" href="javascript:displayPosteriorImage(703)">
+	<area shape="polygon" coords="45,430,52,430,42,411,40,412,45,430" href="javascript:displayPosteriorImage(704)">
+	<area shape="polygon" coords="21,414,31,413,40,376,26,378,21,414" href="javascript:displayPosteriorImage(737)">
+	<area shape="polygon" coords="31,413,37,413,40,376,31,413" href="javascript:displayPosteriorImage(739)">
+	<area shape="polygon" coords="37,413,40,412,49,377,40,376,37,413" href="javascript:displayPosteriorImage(740)">
+	<area shape="polygon" coords="14,416,21,414,26,378,14,379,14,416" href="javascript:displayPosteriorImage(748)">
+	<area shape="polygon" coords="353,487,354,482,352,482,353,487" href="javascript:displayPosteriorImage(751)">
+	<area shape="polygon" coords="353,487,354,482,357,485,353,487" href="javascript:displayPosteriorImage(752)">
+	<area shape="polygon" coords="337,495,341,491,336,491,337,495" href="javascript:displayPosteriorImage(755)">
+	<area shape="polygon" coords="337,495,341,491,342,494,337,495" href="javascript:displayPosteriorImage(756)">
+	<area shape="polygon" coords="324,494,328,490,324,489,324,494" href="javascript:displayPosteriorImage(759)">
+	<area shape="polygon" coords="324,494,328,490,330,495,324,494" href="javascript:displayPosteriorImage(760)">
+	<area shape="polygon" coords="320,490,324,487,321,486,320,490" href="javascript:displayPosteriorImage(763)">
+	<area shape="polygon" coords="325,476,327,469,321,468,325,476" href="javascript:displayPosteriorImage(767)">
+	<area shape="polygon" coords="325,476,327,469,331,472,325,476" href="javascript:displayPosteriorImage(768)">
+	<area shape="polygon" coords="352,482,354,482,361,470,358,473,352,482" href="javascript:displayPosteriorImage(771)">
+	<area shape="polygon" coords="354,482,357,485,366,473,361,470,354,482" href="javascript:displayPosteriorImage(772)">
+	<area shape="polygon" coords="336,491,341,491,352,478,349,479,336,491" href="javascript:displayPosteriorImage(775)">
+	<area shape="polygon" coords="341,491,342,494,356,482,352,478,341,491" href="javascript:displayPosteriorImage(776)">
+	<area shape="polygon" coords="324,489,328,490,343,481,339,482,324,489" href="javascript:displayPosteriorImage(779)">
+	<area shape="polygon" coords="328,490,330,495,349,485,343,481,328,490" href="javascript:displayPosteriorImage(780)">
+	<area shape="polygon" coords="321,486,324,487,339,479,333,475,321,486" href="javascript:displayPosteriorImage(783)">
+	<area shape="polygon" coords="358,473,361,470,362,459,356,463,358,473" href="javascript:displayPosteriorImage(787)">
+	<area shape="polygon" coords="361,470,366,473,369,461,362,459,361,470" href="javascript:displayPosteriorImage(788)">
+	<area shape="polygon" coords="349,479,352,478,356,463,351,467,349,479" href="javascript:displayPosteriorImage(791)">
+	<area shape="polygon" coords="339,482,343,481,351,467,345,467,339,482" href="javascript:displayPosteriorImage(795)">
+	<area shape="polygon" coords="333,475,339,479,345,467,338,465,333,475" href="javascript:displayPosteriorImage(799)">
+	<area shape="polygon" coords="321,468,327,469,330,458,323,458,321,468" href="javascript:displayPosteriorImage(803)">
+	<area shape="polygon" coords="327,469,331,472,333,461,330,458,327,469" href="javascript:displayPosteriorImage(804)">
+	<area shape="polygon" coords="330,458,333,461,338,451,333,449,330,458" href="javascript:displayPosteriorImage(810)">
+	<area shape="polygon" coords="323,458,330,458,333,449,325,446,323,458" href="javascript:displayPosteriorImage(813)">
+	<area shape="polygon" coords="338,465,345,467,341,451,333,449,338,465" href="javascript:displayPosteriorImage(814)">
+	<area shape="polygon" coords="345,467,351,467,348,451,341,451,345,467" href="javascript:displayPosteriorImage(815)">
+	<area shape="polygon" coords="351,467,356,463,353,446,348,451,351,467" href="javascript:displayPosteriorImage(816)">
+	<area shape="polygon" coords="356,463,362,459,359,444,353,446,356,463" href="javascript:displayPosteriorImage(817)">
+	<area shape="polygon" coords="362,459,369,461,369,448,359,444,362,459" href="javascript:displayPosteriorImage(818)">
+	<area shape="polygon" coords="325,446,333,449,333,430,328,431,325,446" href="javascript:displayPosteriorImage(825)">
+	<area shape="polygon" coords="333,449,341,451,340,430,333,430,333,449" href="javascript:displayPosteriorImage(826)">
+	<area shape="polygon" coords="341,451,348,451,346,430,340,430,341,451" href="javascript:displayPosteriorImage(827)">
+	<area shape="polygon" coords="348,451,353,446,350,428,346,430,348,451" href="javascript:displayPosteriorImage(828)">
+	<area shape="polygon" coords="353,446,359,444,359,428,350,428,353,446" href="javascript:displayPosteriorImage(829)">
+	<area shape="polygon" coords="359,444,369,448,371,430,359,428,359,444" href="javascript:displayPosteriorImage(830)">
+	<area shape="polygon" coords="328,431,333,430,343,411,342,411,328,431" href="javascript:displayPosteriorImage(837)">
+	<area shape="polygon" coords="333,430,340,430,345,412,343,411,333,430" href="javascript:displayPosteriorImage(838)">
+	<area shape="polygon" coords="340,430,346,430,348,413,345,412,340,430" href="javascript:displayPosteriorImage(839)">
+	<area shape="polygon" coords="346,430,350,428,354,413,348,413,346,430" href="javascript:displayPosteriorImage(840)">
+	<area shape="polygon" coords="350,428,359,428,364,414,354,413,350,428" href="javascript:displayPosteriorImage(841)">
+	<area shape="polygon" coords="359,428,371,430,371,416,364,414,359,428" href="javascript:displayPosteriorImage(842)">
+	<area shape="polygon" coords="345,412,348,413,345,376,336,377,345,412" href="javascript:displayPosteriorImage(851)">
+	<area shape="polygon" coords="354,413,348,413,345,376,354,413" href="javascript:displayPosteriorImage(852)">
+	<area shape="polygon" coords="354,413,364,414,359,378,345,376,354,413" href="javascript:displayPosteriorImage(853)">
+	<area shape="polygon" coords="364,414,371,416,371,379,359,378,364,414" href="javascript:displayPosteriorImage(854)">
+
+	<area shape="default" nohref>
+</map>
+
+<map name="ANTERIOR_SKIN_ELEMENT">
+
+	<area shape="polygon" coords="285,170,305,170,286,141,285,170" href="javascript:displayAnteriorImage(258)">
+	<area shape="polygon" coords="305,170,327,170,315,141,286,141,305,170" href="javascript:displayAnteriorImage(259)">
+	<area shape="polygon" coords="327,170,337,170,335,141,315,141,327,170" href="javascript:displayAnteriorImage(260)">
+	<area shape="polygon" coords="41,170,52,170,62,141,45,141,41,170" href="javascript:displayAnteriorImage(273)">
+	<area shape="polygon" coords="52,170,74,170,92,141,62,141,52,170" href="javascript:displayAnteriorImage(274)">
+	<area shape="polygon" coords="94,170,74,170,92,141,94,170" href="javascript:displayAnteriorImage(275)">
+	<area shape="polygon" coords="197,551,218,551,214,523,196,524,197,551" href="javascript:displayAnteriorImage(317)">
+	<area shape="polygon" coords="218,551,253,551,253,524,214,523,218,551" href="javascript:displayAnteriorImage(318)">
+	<area shape="polygon" coords="253,551,293,551,295,524,253,524,253,551" href="javascript:displayAnteriorImage(319)">
+	<area shape="polygon" coords="293,551,308,551,310,524,295,524,293,551" href="javascript:displayAnteriorImage(320)">
+	<area shape="polygon" coords="82,551,98,551,98,523,80,524,82,551" href="javascript:displayAnteriorImage(365)">
+	<area shape="polygon" coords="98,551,139,551,140,524,98,523,98,551" href="javascript:displayAnteriorImage(366)">
+	<area shape="polygon" coords="139,551,172,551,178,524,140,524,139,551" href="javascript:displayAnteriorImage(367)">
+	<area shape="polygon" coords="172,551,191,551,195,524,178,524,172,551" href="javascript:displayAnteriorImage(368)">
+	<area shape="polygon" coords="196,524,214,523,219,496,197,496,196,524" href="javascript:displayAnteriorImage(373)">
+	<area shape="polygon" coords="214,523,253,524,256,496,219,496,214,523" href="javascript:displayAnteriorImage(374)">
+	<area shape="polygon" coords="253,524,295,524,296,496,256,496,253,524" href="javascript:displayAnteriorImage(375)">
+	<area shape="polygon" coords="295,524,310,524,310,496,296,496,295,524" href="javascript:displayAnteriorImage(376)">
+	<area shape="polygon" coords="80,524,98,523,96,496,79,496,80,524" href="javascript:displayAnteriorImage(379)">
+	<area shape="polygon" coords="98,523,140,524,135,496,96,496,98,523" href="javascript:displayAnteriorImage(380)">
+	<area shape="polygon" coords="140,524,178,524,176,496,135,496,140,524" href="javascript:displayAnteriorImage(381)">
+	<area shape="polygon" coords="178,524,195,524,197,496,176,496,178,524" href="javascript:displayAnteriorImage(382)">
+	<area shape="polygon" coords="197,496,219,496,223,469,196,469,197,496" href="javascript:displayAnteriorImage(387)">
+	<area shape="polygon" coords="219,496,256,496,256,469,223,469,219,496" href="javascript:displayAnteriorImage(388)">
+	<area shape="polygon" coords="256,496,296,496,294,469,256,469,256,496" href="javascript:displayAnteriorImage(389)">
+	<area shape="polygon" coords="296,496,310,496,308,469,294,469,296,496" href="javascript:displayAnteriorImage(390)">
+	<area shape="polygon" coords="79,496,96,496,97,469,82,469,79,496" href="javascript:displayAnteriorImage(399)">
+	<area shape="polygon" coords="96,496,135,496,131,469,97,469,96,496" href="javascript:displayAnteriorImage(400)">
+	<area shape="polygon" coords="135,496,176,496,169,469,131,469,135,496" href="javascript:displayAnteriorImage(401)">
+	<area shape="polygon" coords="176,496,197,496,196,469,169,469,176,496" href="javascript:displayAnteriorImage(402)">
+	<area shape="polygon" coords="196,469,223,469,222,441,194,441,196,469" href="javascript:displayAnteriorImage(403)">
+	<area shape="polygon" coords="223,469,256,469,252,441,222,441,223,469" href="javascript:displayAnteriorImage(404)">
+	<area shape="polygon" coords="256,469,294,469,289,441,252,441,256,469" href="javascript:displayAnteriorImage(405)">
+	<area shape="polygon" coords="294,469,308,469,304,442,289,441,294,469" href="javascript:displayAnteriorImage(406)">
+	<area shape="polygon" coords="82,469,97,469,101,441,86,442,82,469" href="javascript:displayAnteriorImage(415)">
+	<area shape="polygon" coords="97,469,131,469,132,442,101,441,97,469" href="javascript:displayAnteriorImage(416)">
+	<area shape="polygon" coords="131,469,169,469,165,442,132,442,131,469" href="javascript:displayAnteriorImage(417)">
+	<area shape="polygon" coords="169,469,196,469,194,441,165,442,169,469" href="javascript:displayAnteriorImage(418)">
+	<area shape="polygon" coords="194,441,222,441,223,414,193,414,194,441" href="javascript:displayAnteriorImage(419)">
+	<area shape="polygon" coords="222,441,252,441,250,414,223,414,222,441" href="javascript:displayAnteriorImage(420)">
+	<area shape="polygon" coords="252,441,289,441,280,414,250,414,252,441" href="javascript:displayAnteriorImage(421)">
+	<area shape="polygon" coords="289,441,304,442,301,414,280,414,289,441" href="javascript:displayAnteriorImage(422)">
+	<area shape="polygon" coords="86,442,101,441,107,414,89,414,86,442" href="javascript:displayAnteriorImage(431)">
+	<area shape="polygon" coords="101,441,132,442,136,414,107,414,101,441" href="javascript:displayAnteriorImage(432)">
+	<area shape="polygon" coords="132,442,165,442,164,414,136,414,132,442" href="javascript:displayAnteriorImage(433)">
+	<area shape="polygon" coords="165,442,194,441,193,414,164,414,165,442" href="javascript:displayAnteriorImage(434)">
+	<area shape="polygon" coords="193,414,223,414,230,387,192,387,193,414" href="javascript:displayAnteriorImage(435)">
+	<area shape="polygon" coords="223,414,250,414,254,387,230,387,223,414" href="javascript:displayAnteriorImage(436)">
+	<area shape="polygon" coords="250,414,280,414,276,387,254,387,250,414" href="javascript:displayAnteriorImage(437)">
+	<area shape="polygon" coords="280,414,301,414,297,387,276,387,280,414" href="javascript:displayAnteriorImage(438)">
+	<area shape="polygon" coords="89,414,107,414,114,387,95,387,89,414" href="javascript:displayAnteriorImage(447)">
+	<area shape="polygon" coords="107,414,136,414,136,387,114,387,107,414" href="javascript:displayAnteriorImage(448)">
+	<area shape="polygon" coords="136,414,164,414,158,387,136,387,136,414" href="javascript:displayAnteriorImage(449)">
+	<area shape="polygon" coords="164,414,193,414,192,387,158,387,164,414" href="javascript:displayAnteriorImage(450)">
+	<area shape="polygon" coords="192,387,230,387,235,359,192,359,192,387" href="javascript:displayAnteriorImage(451)">
+	<area shape="polygon" coords="230,387,254,387,261,359,235,359,230,387" href="javascript:displayAnteriorImage(452)">
+	<area shape="polygon" coords="254,387,276,387,278,359,261,359,254,387" href="javascript:displayAnteriorImage(453)">
+	<area shape="polygon" coords="276,387,297,387,294,359,278,359,276,387" href="javascript:displayAnteriorImage(454)">
+	<area shape="polygon" coords="95,387,114,387,116,359,101,359,95,387" href="javascript:displayAnteriorImage(463)">
+	<area shape="polygon" coords="114,387,136,387,129,359,116,359,114,387" href="javascript:displayAnteriorImage(464)">
+	<area shape="polygon" coords="136,387,158,387,152,359,129,359,136,387" href="javascript:displayAnteriorImage(465)">
+	<area shape="polygon" coords="158,387,192,387,192,359,152,359,158,387" href="javascript:displayAnteriorImage(466)">
+	<area shape="polygon" coords="192,359,235,359,236,332,192,332,192,359" href="javascript:displayAnteriorImage(467)">
+	<area shape="polygon" coords="235,359,261,359,263,332,236,332,235,359" href="javascript:displayAnteriorImage(468)">
+	<area shape="polygon" coords="261,359,278,359,279,332,263,332,261,359" href="javascript:displayAnteriorImage(469)">
+	<area shape="polygon" coords="278,359,294,359,287,332,279,332,278,359" href="javascript:displayAnteriorImage(470)">
+	<area shape="polygon" coords="101,359,116,359,113,332,104,332,101,359" href="javascript:displayAnteriorImage(479)">
+	<area shape="polygon" coords="116,359,129,359,125,332,113,332,116,359" href="javascript:displayAnteriorImage(480)">
+	<area shape="polygon" coords="129,359,152,359,150,332,125,332,129,359" href="javascript:displayAnteriorImage(481)">
+	<area shape="polygon" coords="152,359,192,359,192,332,150,332,152,359" href="javascript:displayAnteriorImage(482)">
+	<area shape="polygon" coords="192,332,236,332,237,305,192,305,192,332" href="javascript:displayAnteriorImage(483)">
+	<area shape="polygon" coords="236,332,263,332,265,305,237,305,236,332" href="javascript:displayAnteriorImage(484)">
+	<area shape="polygon" coords="263,332,279,332,281,305,265,305,263,332" href="javascript:displayAnteriorImage(485)">
+	<area shape="polygon" coords="279,332,287,332,287,305,281,305,279,332" href="javascript:displayAnteriorImage(486)">
+	<area shape="polygon" coords="104,332,113,332,110,305,103,305,104,332" href="javascript:displayAnteriorImage(495)">
+	<area shape="polygon" coords="113,332,125,332,125,305,110,305,113,332" href="javascript:displayAnteriorImage(496)">
+	<area shape="polygon" coords="125,332,150,332,150,305,125,305,125,332" href="javascript:displayAnteriorImage(497)">
+	<area shape="polygon" coords="150,332,192,332,192,305,150,305,150,332" href="javascript:displayAnteriorImage(498)">
+	<area shape="polygon" coords="192,305,237,305,238,277,193,277,192,305" href="javascript:displayAnteriorImage(499)">
+	<area shape="polygon" coords="237,305,265,305,266,277,238,277,237,305" href="javascript:displayAnteriorImage(500)">
+	<area shape="polygon" coords="265,305,281,305,282,277,266,277,265,305" href="javascript:displayAnteriorImage(501)">
+	<area shape="polygon" coords="281,305,287,305,288,277,282,277,281,305" href="javascript:displayAnteriorImage(502)">
+	<area shape="polygon" coords="103,305,110,305,110,277,104,277,103,305" href="javascript:displayAnteriorImage(511)">
+	<area shape="polygon" coords="110,305,125,305,124,277,110,277,110,305" href="javascript:displayAnteriorImage(512)">
+	<area shape="polygon" coords="125,305,150,305,149,277,124,277,125,305" href="javascript:displayAnteriorImage(513)">
+	<area shape="polygon" coords="150,305,192,305,193,277,149,277,150,305" href="javascript:displayAnteriorImage(514)">
+	<area shape="polygon" coords="193,277,238,277,237,250,192,250,193,277" href="javascript:displayAnteriorImage(515)">
+	<area shape="polygon" coords="238,277,266,277,266,250,237,250,238,277" href="javascript:displayAnteriorImage(516)">
+	<area shape="polygon" coords="266,277,282,277,282,250,266,250,266,277" href="javascript:displayAnteriorImage(517)">
+	<area shape="polygon" coords="282,277,288,277,288,250,282,250,282,277" href="javascript:displayAnteriorImage(518)">
+	<area shape="polygon" coords="104,277,110,277,109,250,102,250,104,277" href="javascript:displayAnteriorImage(527)">
+	<area shape="polygon" coords="110,277,124,277,123,250,109,250,110,277" href="javascript:displayAnteriorImage(528)">
+	<area shape="polygon" coords="124,277,149,277,150,250,123,250,124,277" href="javascript:displayAnteriorImage(529)">
+	<area shape="polygon" coords="149,277,193,277,192,250,150,250,149,277" href="javascript:displayAnteriorImage(530)">
+	<area shape="polygon" coords="192,250,237,250,235,223,192,223,192,250" href="javascript:displayAnteriorImage(531)">
+	<area shape="polygon" coords="237,250,266,250,266,223,235,223,237,250" href="javascript:displayAnteriorImage(532)">
+	<area shape="polygon" coords="266,250,282,250,282,223,266,223,266,250" href="javascript:displayAnteriorImage(533)">
+	<area shape="polygon" coords="282,250,288,250,289,223,282,223,282,250" href="javascript:displayAnteriorImage(534)">
+	<area shape="polygon" coords="102,250,109,250,106,223,97,223,102,250" href="javascript:displayAnteriorImage(543)">
+	<area shape="polygon" coords="109,250,123,250,121,223,106,223,109,250" href="javascript:displayAnteriorImage(544)">
+	<area shape="polygon" coords="123,250,150,250,151,223,121,223,123,250" href="javascript:displayAnteriorImage(545)">
+	<area shape="polygon" coords="150,250,192,250,192,223,151,223,150,250" href="javascript:displayAnteriorImage(546)">
+	<area shape="polygon" coords="192,223,235,223,233,195,192,195,192,223" href="javascript:displayAnteriorImage(547)">
+	<area shape="polygon" coords="235,223,266,223,270,195,233,195,235,223" href="javascript:displayAnteriorImage(548)">
+	<area shape="polygon" coords="266,223,282,223,285,195,270,195,266,223" href="javascript:displayAnteriorImage(549)">
+	<area shape="polygon" coords="282,223,289,223,289,195,285,195,282,223" href="javascript:displayAnteriorImage(550)">
+	<area shape="polygon" coords="97,223,106,223,100,195,97,195,97,223" href="javascript:displayAnteriorImage(559)">
+	<area shape="polygon" coords="106,223,121,223,117,195,100,195,106,223" href="javascript:displayAnteriorImage(560)">
+	<area shape="polygon" coords="121,223,151,223,151,195,117,195,121,223" href="javascript:displayAnteriorImage(561)">
+	<area shape="polygon" coords="151,223,192,223,192,195,151,195,151,223" href="javascript:displayAnteriorImage(562)">
+	<area shape="polygon" coords="192,195,233,195,226,168,192,168,192,195" href="javascript:displayAnteriorImage(563)">
+	<area shape="polygon" coords="233,195,270,195,266,168,226,168,233,195" href="javascript:displayAnteriorImage(564)">
+	<area shape="polygon" coords="270,195,285,195,288,168,266,168,270,195" href="javascript:displayAnteriorImage(565)">
+	<area shape="polygon" coords="151,195,192,195,192,168,160,168,151,195" href="javascript:displayAnteriorImage(566)">
+	<area shape="polygon" coords="117,195,151,195,160,168,121,168,117,195" href="javascript:displayAnteriorImage(567)">
+	<area shape="polygon" coords="100,195,117,195,121,168,92,168,100,195" href="javascript:displayAnteriorImage(568)">
+	<area shape="polygon" coords="192,141,215,141,206,113,192,113,192,141" href="javascript:displayAnteriorImage(569)">
+	<area shape="polygon" coords="215,141,255,141,220,113,206,113,215,141" href="javascript:displayAnteriorImage(570)">
+	<area shape="polygon" coords="255,141,286,141,252,113,220,113,255,141" href="javascript:displayAnteriorImage(571)">
+	<area shape="polygon" coords="286,141,315,141,299,113,252,113,286,141" href="javascript:displayAnteriorImage(572)">
+	<area shape="polygon" coords="315,141,335,141,324,113,299,113,315,141" href="javascript:displayAnteriorImage(573)">
+	<area shape="polygon" coords="45,141,62,141,80,113,58,112,45,141" href="javascript:displayAnteriorImage(580)">
+	<area shape="polygon" coords="62,141,92,141,137,113,80,113,62,141" href="javascript:displayAnteriorImage(581)">
+	<area shape="polygon" coords="92,141,135,141,165,113,137,113,92,141" href="javascript:displayAnteriorImage(582)">
+	<area shape="polygon" coords="135,141,170,141,178,113,165,113,135,141" href="javascript:displayAnteriorImage(583)">
+	<area shape="polygon" coords="170,141,192,141,192,113,178,113,170,141" href="javascript:displayAnteriorImage(584)">
+	<area shape="polygon" coords="192,113,206,113,205,86,192,86,192,113" href="javascript:displayAnteriorImage(585)">
+	<area shape="polygon" coords="206,113,220,113,217,86,205,86,206,113" href="javascript:displayAnteriorImage(586)">
+	<area shape="polygon" coords="220,113,252,113,226,86,217,86,220,113" href="javascript:displayAnteriorImage(587)">
+	<area shape="polygon" coords="252,113,299,113,232,86,226,86,252,113" href="javascript:displayAnteriorImage(588)">
+	<area shape="polygon" coords="299,113,324,113,266,86,232,86,299,113" href="javascript:displayAnteriorImage(589)">
+	<area shape="polygon" coords="58,112,80,113,149,86,124,86,58,112" href="javascript:displayAnteriorImage(596)">
+	<area shape="polygon" coords="80,113,137,113,153,86,149,86,80,113" href="javascript:displayAnteriorImage(597)">
+	<area shape="polygon" coords="137,113,165,113,165,86,153,86,137,113" href="javascript:displayAnteriorImage(598)">
+	<area shape="polygon" coords="165,113,178,113,176,86,165,86,165,113" href="javascript:displayAnteriorImage(599)">
+	<area shape="polygon" coords="178,113,192,113,192,86,176,86,178,113" href="javascript:displayAnteriorImage(600)">
+	<area shape="polygon" coords="192,168,226,168,215,141,192,141,192,168" href="javascript:displayAnteriorImage(601)">
+	<area shape="polygon" coords="226,168,266,168,255,141,215,141,226,168" href="javascript:displayAnteriorImage(602)">
+	<area shape="polygon" coords="266,168,288,168,286,141,255,141,266,168" href="javascript:displayAnteriorImage(603)">
+	<area shape="polygon" coords="92,168,121,168,135,141,92,141,92,168" href="javascript:displayAnteriorImage(608)">
+	<area shape="polygon" coords="121,168,160,168,170,141,135,141,121,168" href="javascript:displayAnteriorImage(609)">
+	<area shape="polygon" coords="160,168,192,168,192,141,170,141,160,168" href="javascript:displayAnteriorImage(610)">
+	<area shape="polygon" coords="350,487,349,482,352,485,350,487" href="javascript:displayAnteriorImage(612)">
+	<area shape="polygon" coords="350,487,352,485,354,485,350,487" href="javascript:displayAnteriorImage(613)">
+	<area shape="polygon" coords="349,482,352,485,359,474,354,473,349,482" href="javascript:displayAnteriorImage(616)">
+	<area shape="polygon" coords="352,485,354,485,363,473,359,474,352,485" href="javascript:displayAnteriorImage(617)">
+	<area shape="polygon" coords="359,474,363,473,366,461,362,467,359,474" href="javascript:displayAnteriorImage(621)">
+	<area shape="polygon" coords="334,495,333,491,335,494,334,495" href="javascript:displayAnteriorImage(624)">
+	<area shape="polygon" coords="334,495,335,494,339,494,334,495" href="javascript:displayAnteriorImage(625)">
+	<area shape="polygon" coords="333,491,335,494,350,482,346,479,333,491" href="javascript:displayAnteriorImage(628)">
+	<area shape="polygon" coords="335,494,339,494,353,482,350,482,335,494" href="javascript:displayAnteriorImage(629)">
+	<area shape="polygon" coords="350,482,353,482,362,467,356,470,350,482" href="javascript:displayAnteriorImage(633)">
+	<area shape="polygon" coords="321,494,321,489,324,494,321,494" href="javascript:displayAnteriorImage(636)">
+	<area shape="polygon" coords="321,494,324,494,326,495,321,494" href="javascript:displayAnteriorImage(637)">
+	<area shape="polygon" coords="321,489,324,494,339,484,336,482,321,489" href="javascript:displayAnteriorImage(640)">
+	<area shape="polygon" coords="324,494,326,495,346,485,339,484,324,494" href="javascript:displayAnteriorImage(641)">
+	<area shape="polygon" coords="339,484,346,485,356,470,347,470,339,484" href="javascript:displayAnteriorImage(645)">
+	<area shape="polygon" coords="317,490,318,486,319,490,317,490" href="javascript:displayAnteriorImage(648)">
+	<area shape="polygon" coords="317,490,319,490,323,490,317,490" href="javascript:displayAnteriorImage(649)">
+	<area shape="polygon" coords="318,486,319,490,332,480,330,475,318,486" href="javascript:displayAnteriorImage(652)">
+	<area shape="polygon" coords="319,490,323,490,338,481,332,480,319,490" href="javascript:displayAnteriorImage(653)">
+	<area shape="polygon" coords="330,475,332,480,338,466,335,465,330,475" href="javascript:displayAnteriorImage(656)">
+	<area shape="polygon" coords="332,480,338,481,347,470,338,466,332,480" href="javascript:displayAnteriorImage(657)">
+	<area shape="polygon" coords="322,476,318,468,322,470,322,476" href="javascript:displayAnteriorImage(660)">
+	<area shape="polygon" coords="322,476,322,470,328,472,322,476" href="javascript:displayAnteriorImage(661)">
+	<area shape="polygon" coords="318,468,322,470,322,460,320,458,318,468" href="javascript:displayAnteriorImage(664)">
+	<area shape="polygon" coords="322,470,328,472,330,461,322,460,322,470" href="javascript:displayAnteriorImage(665)">
+	<area shape="polygon" coords="320,458,322,460,324,448,322,446,320,458" href="javascript:displayAnteriorImage(668)">
+	<area shape="polygon" coords="322,460,330,461,335,451,324,448,322,460" href="javascript:displayAnteriorImage(669)">
+	<area shape="polygon" coords="335,465,338,466,335,451,330,448,335,465" href="javascript:displayAnteriorImage(675)">
+	<area shape="polygon" coords="338,466,347,470,350,456,335,451,338,466" href="javascript:displayAnteriorImage(676)">
+	<area shape="polygon" coords="347,470,356,470,362,455,350,456,347,470" href="javascript:displayAnteriorImage(677)">
+	<area shape="polygon" coords="356,470,362,467,368,453,362,455,356,470" href="javascript:displayAnteriorImage(678)">
+	<area shape="polygon" coords="322,446,324,448,330,432,325,431,322,446" href="javascript:displayAnteriorImage(682)">
+	<area shape="polygon" coords="324,448,335,451,340,433,330,432,324,448" href="javascript:displayAnteriorImage(683)">
+	<area shape="polygon" coords="335,451,350,456,349,432,340,433,335,451" href="javascript:displayAnteriorImage(684)">
+	<area shape="polygon" coords="350,456,362,455,362,433,349,432,350,456" href="javascript:displayAnteriorImage(685)">
+	<area shape="polygon" coords="362,455,368,453,370,432,362,433,362,455" href="javascript:displayAnteriorImage(686)">
+	<area shape="polygon" coords="325,431,330,432,340,412,339,411,325,431" href="javascript:displayAnteriorImage(694)">
+	<area shape="polygon" coords="330,432,340,433,345,413,340,412,330,432" href="javascript:displayAnteriorImage(695)">
+	<area shape="polygon" coords="340,433,349,432,352,415,345,413,340,433" href="javascript:displayAnteriorImage(696)">
+	<area shape="polygon" coords="349,432,362,433,363,418,352,415,349,432" href="javascript:displayAnteriorImage(697)">
+	<area shape="polygon" coords="362,433,370,432,370,418,363,418,362,433" href="javascript:displayAnteriorImage(698)">
+	<area shape="polygon" coords="347,379,363,379,357,333,340,341,347,379" href="javascript:displayAnteriorImage(705)">
+	<area shape="polygon" coords="363,379,368,379,363,329,357,333,363,379" href="javascript:displayAnteriorImage(706)">
+	<area shape="polygon" coords="332,377,334,378,329,340,318,339,332,377" href="javascript:displayAnteriorImage(711)">
+	<area shape="polygon" coords="334,378,347,379,340,341,329,340,334,378" href="javascript:displayAnteriorImage(712)">
+	<area shape="polygon" coords="340,341,357,333,345,275,327,278,340,341" href="javascript:displayAnteriorImage(713)">
+	<area shape="polygon" coords="357,333,363,329,351,273,345,275,357,333" href="javascript:displayAnteriorImage(714)">
+	<area shape="polygon" coords="318,339,329,340,315,278,300,276,318,339" href="javascript:displayAnteriorImage(719)">
+	<area shape="polygon" coords="329,340,340,341,327,278,315,278,329,340" href="javascript:displayAnteriorImage(720)">
+	<area shape="polygon" coords="327,278,345,275,334,217,313,217,327,278" href="javascript:displayAnteriorImage(721)">
+	<area shape="polygon" coords="345,275,351,273,345,217,334,217,345,275" href="javascript:displayAnteriorImage(722)">
+	<area shape="polygon" coords="300,276,315,278,293,217,288,217,300,276" href="javascript:displayAnteriorImage(727)">
+	<area shape="polygon" coords="315,278,327,278,313,217,293,217,315,278" href="javascript:displayAnteriorImage(728)">
+	<area shape="polygon" coords="313,217,334,217,327,170,305,170,313,217" href="javascript:displayAnteriorImage(729)">
+	<area shape="polygon" coords="334,217,345,217,337,170,327,170,334,217" href="javascript:displayAnteriorImage(730)">
+	<area shape="polygon" coords="293,217,313,217,305,170,285,170,293,217" href="javascript:displayAnteriorImage(736)">
+	<area shape="polygon" coords="340,412,345,413,347,379,334,378,340,412" href="javascript:displayAnteriorImage(743)">
+	<area shape="polygon" coords="345,413,352,415,347,379,345,413" href="javascript:displayAnteriorImage(744)">
+	<area shape="polygon" coords="352,415,363,418,363,379,347,379,352,415" href="javascript:displayAnteriorImage(745)">
+	<area shape="polygon" coords="363,418,370,418,368,379,363,379,363,418" href="javascript:displayAnteriorImage(746)">
+	<area shape="polygon" coords="29,487,27,485,25,485,29,487" href="javascript:displayAnteriorImage(749)">
+	<area shape="polygon" coords="29,487,30,482,27,485,29,487" href="javascript:displayAnteriorImage(750)">
+	<area shape="polygon" coords="45,495,44,494,40,494,45,495" href="javascript:displayAnteriorImage(753)">
+	<area shape="polygon" coords="45,495,46,491,44,494,45,495" href="javascript:displayAnteriorImage(754)">
+	<area shape="polygon" coords="58,494,55,494,52,495,58,494" href="javascript:displayAnteriorImage(757)">
+	<area shape="polygon" coords="58,494,58,489,55,494,58,494" href="javascript:displayAnteriorImage(758)">
+	<area shape="polygon" coords="62,490,60,490,56,490,62,490" href="javascript:displayAnteriorImage(761)">
+	<area shape="polygon" coords="62,490,61,486,60,490,62,490" href="javascript:displayAnteriorImage(762)">
+	<area shape="polygon" coords="57,476,57,470,51,472,57,476" href="javascript:displayAnteriorImage(765)">
+	<area shape="polygon" coords="57,476,61,468,57,470,57,476" href="javascript:displayAnteriorImage(766)">
+	<area shape="polygon" coords="25,485,27,485,20,474,16,473,25,485" href="javascript:displayAnteriorImage(769)">
+	<area shape="polygon" coords="40,494,44,494,29,482,26,482,40,494" href="javascript:displayAnteriorImage(773)">
+	<area shape="polygon" coords="52,495,55,494,40,484,33,485,52,495" href="javascript:displayAnteriorImage(777)">
+	<area shape="polygon" coords="55,494,58,489,43,482,40,484,55,494" href="javascript:displayAnteriorImage(778)">
+	<area shape="polygon" coords="56,490,60,490,47,480,41,481,56,490" href="javascript:displayAnteriorImage(781)">
+	<area shape="polygon" coords="60,490,61,486,49,475,47,480,60,490" href="javascript:displayAnteriorImage(782)">
+	<area shape="polygon" coords="16,473,20,474,17,467,13,461,16,473" href="javascript:displayAnteriorImage(785)">
+	<area shape="polygon" coords="26,482,29,482,22,470,17,467,26,482" href="javascript:displayAnteriorImage(789)">
+	<area shape="polygon" coords="33,485,40,484,32,470,22,470,33,485" href="javascript:displayAnteriorImage(793)">
+	<area shape="polygon" coords="41,481,47,480,41,466,32,470,41,481" href="javascript:displayAnteriorImage(797)">
+	<area shape="polygon" coords="47,480,49,475,44,465,41,466,47,480" href="javascript:displayAnteriorImage(798)">
+	<area shape="polygon" coords="51,472,57,470,57,460,49,461,51,472" href="javascript:displayAnteriorImage(801)">
+	<area shape="polygon" coords="57,470,61,468,59,458,57,460,57,470" href="javascript:displayAnteriorImage(802)">
+	<area shape="polygon" coords="17,467,22,470,16,455,11,453,17,467" href="javascript:displayAnteriorImage(806)">
+	<area shape="polygon" coords="22,470,32,470,29,456,16,455,22,470" href="javascript:displayAnteriorImage(807)">
+	<area shape="polygon" coords="32,470,41,466,44,451,29,456,32,470" href="javascript:displayAnteriorImage(808)">
+	<area shape="polygon" coords="41,466,44,465,49,449,44,451,41,466" href="javascript:displayAnteriorImage(809)">
+	<area shape="polygon" coords="49,461,57,460,55,448,44,451,49,461" href="javascript:displayAnteriorImage(811)">
+	<area shape="polygon" coords="57,460,59,458,57,446,55,448,57,460" href="javascript:displayAnteriorImage(812)">
+	<area shape="polygon" coords="11,453,16,455,17,433,9,432,11,453" href="javascript:displayAnteriorImage(820)">
+	<area shape="polygon" coords="16,455,29,456,29,432,17,433,16,455" href="javascript:displayAnteriorImage(821)">
+	<area shape="polygon" coords="29,456,44,451,39,433,29,432,29,456" href="javascript:displayAnteriorImage(822)">
+	<area shape="polygon" coords="44,451,55,448,49,432,39,433,44,451" href="javascript:displayAnteriorImage(823)">
+	<area shape="polygon" coords="55,448,57,446,54,431,49,432,55,448" href="javascript:displayAnteriorImage(824)">
+	<area shape="polygon" coords="9,432,17,433,16,418,9,418,9,432" href="javascript:displayAnteriorImage(832)">
+	<area shape="polygon" coords="17,433,29,432,27,415,16,418,17,433" href="javascript:displayAnteriorImage(833)">
+	<area shape="polygon" coords="29,432,39,433,34,413,27,415,29,432" href="javascript:displayAnteriorImage(834)">
+	<area shape="polygon" coords="39,433,49,432,39,412,34,413,39,433" href="javascript:displayAnteriorImage(835)">
+	<area shape="polygon" coords="49,432,54,431,40,411,39,412,49,432" href="javascript:displayAnteriorImage(836)">
+	<area shape="polygon" coords="9,418,16,418,16,379,11,379,9,418" href="javascript:displayAnteriorImage(844)">
+	<area shape="polygon" coords="16,418,27,415,32,379,16,379,16,418" href="javascript:displayAnteriorImage(845)">
+	<area shape="polygon" coords="34,413,27,415,32,379,34,413" href="javascript:displayAnteriorImage(846)">
+	<area shape="polygon" coords="34,413,39,412,45,378,32,379,34,413" href="javascript:displayAnteriorImage(847)">
+	<area shape="polygon" coords="11,379,16,379,22,333,16,329,11,379" href="javascript:displayAnteriorImage(855)">
+	<area shape="polygon" coords="16,379,32,379,39,341,22,333,16,379" href="javascript:displayAnteriorImage(856)">
+	<area shape="polygon" coords="32,379,45,378,50,340,39,341,32,379" href="javascript:displayAnteriorImage(857)">
+	<area shape="polygon" coords="45,378,47,377,60,339,50,340,45,378" href="javascript:displayAnteriorImage(858)">
+	<area shape="polygon" coords="16,329,22,333,34,275,28,273,16,329" href="javascript:displayAnteriorImage(863)">
+	<area shape="polygon" coords="22,333,39,341,52,278,34,275,22,333" href="javascript:displayAnteriorImage(864)">
+	<area shape="polygon" coords="39,341,50,340,64,278,52,278,39,341" href="javascript:displayAnteriorImage(865)">
+	<area shape="polygon" coords="50,340,60,339,79,276,64,278,50,340" href="javascript:displayAnteriorImage(866)">
+	<area shape="polygon" coords="28,273,34,275,44,217,34,217,28,273" href="javascript:displayAnteriorImage(871)">
+	<area shape="polygon" coords="34,275,52,278,66,217,44,217,34,275" href="javascript:displayAnteriorImage(872)">
+	<area shape="polygon" coords="52,278,64,278,85,217,66,217,52,278" href="javascript:displayAnteriorImage(873)">
+	<area shape="polygon" coords="64,278,79,276,91,217,85,217,64,278" href="javascript:displayAnteriorImage(874)">
+	<area shape="polygon" coords="34,217,44,217,52,170,41,170,34,217" href="javascript:displayAnteriorImage(879)">
+	<area shape="polygon" coords="44,217,66,217,74,170,52,170,44,217" href="javascript:displayAnteriorImage(880)">
+	<area shape="polygon" coords="66,217,85,217,94,170,74,170,66,217" href="javascript:displayAnteriorImage(881)">
+
+	<area shape="default" nohref>
+</map>
+
+<DIV class=footerMenu></DIV>
+
+<!--<DIV class=footer>Designed by <a href="http://www.getcsstemplates.com">Free CSS Templates</a> :: Copyright � 2007-->
+<BR></DIV>
+
+
+</BODY></HTML>

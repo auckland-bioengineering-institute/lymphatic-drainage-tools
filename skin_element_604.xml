@@ -1,0 +1,10 @@
+<stats>
+   <stat code="la" name="Left Axilla" count="115">93.5%</stat>
+   <stat code="ra" name="Right Axilla" count="61">49.6%</stat>
+   <stat code="ltis" name="Left TIS*" count="14">11.4%</stat>
+   <stat code="rtis" name="Right TIS*" count="10">8.1%</stat>
+   <stat code="lc5" name="Left Cervical Level V" count="2">1.6%</stat>
+   <stat code="lsc" name="Left Supraclavicular" count="6">4.9%</stat>
+   <stat code="rsc" name="Right Supraclavicular" count="2">1.6%</stat>
+   <stat code="in" name="Interval Node" count="14">11.4%</stat>
+</stats>

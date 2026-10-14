@@ -1,0 +1,8 @@
+<stats>
+   <stat code="lo" name="Left Occipital" count="1">20.0%</stat>
+   <stat code="ro" name="Right Occipital" count="1">20.0%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="2">40.0%</stat>
+   <stat code="lc5" name="Left Cervical Level V" count="1">20.0%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="2">40.0%</stat>
+   <stat code="rsc" name="Right Supraclavicular" count="2">40.0%</stat>
+</stats>

@@ -1,0 +1,7 @@
+<stats>
+   <stat code="ro" name="Right Occipital" count="1">25.0%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="3">75.0%</stat>
+   <stat code="rc4" name="Right Cervical Level IV" count="2">50.0%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="2">50.0%</stat>
+   <stat code="rsc" name="Right Supraclavicular" count="1">25.0%</stat>
+</stats>

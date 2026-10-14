@@ -1,0 +1,7 @@
+<stats>
+   <stat code="lc1" name="Left Cervical Level I" count="2">28.6%</stat>
+   <stat code="rc1" name="Right Cervical Level I" count="5">71.4%</stat>
+   <stat code="lc2" name="Left Cervical Level II" count="1">14.3%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="1">14.3%</stat>
+   <stat code="sm" name="Submental" count="3">42.9%</stat>
+</stats>

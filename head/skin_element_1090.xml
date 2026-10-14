@@ -1,0 +1,14 @@
+<stats>
+   <stat code="lo" name="Left Occipital" count="1">11.1%</stat>
+   <stat code="ro" name="Right Occipital" count="1">11.1%</stat>
+   <stat code="rprea" name="Right Preauricular" count="2">22.2%</stat>
+   <stat code="lposta" name="Left Postauricular" count="4">44.4%</stat>
+   <stat code="rposta" name="Right Postauricular" count="3">33.3%</stat>
+   <stat code="lc2" name="Left Cervical Level II" count="3">33.3%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="3">33.3%</stat>
+   <stat code="lc3" name="Left Cervical Level III" count="1">11.1%</stat>
+   <stat code="lc5" name="Left Cervical Level V" count="4">44.4%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="2">22.2%</stat>
+   <stat code="rsc" name="Right Supraclavicular" count="1">11.1%</stat>
+   <stat code="in" name="Interval Node" count="1">11.1%</stat>
+</stats>

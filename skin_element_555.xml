@@ -1,0 +1,9 @@
+<stats>
+   <stat code="la" name="Left Axilla" count="17">37.8%</stat>
+   <stat code="ra" name="Right Axilla" count="43">95.6%</stat>
+   <stat code="ltis" name="Left TIS*" count="1">2.2%</stat>
+   <stat code="lsc" name="Left Supraclavicular" count="2">4.4%</stat>
+   <stat code="rsc" name="Right Supraclavicular" count="1">2.2%</stat>
+   <stat code="ric" name="Right Infraclavicular" count="1">2.2%</stat>
+   <stat code="in" name="Interval Node" count="6">13.3%</stat>
+</stats>

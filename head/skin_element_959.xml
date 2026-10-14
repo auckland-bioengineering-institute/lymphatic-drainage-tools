@@ -1,0 +1,11 @@
+<stats>
+   <stat code="lprea" name="Left Preauricular" count="1">10.0%</stat>
+   <stat code="lc1" name="Left Cervical Level I" count="7">70.0%</stat>
+   <stat code="lc2" name="Left Cervical Level II" count="8">80.0%</stat>
+   <stat code="lc3" name="Left Cervical Level III" count="2">20.0%</stat>
+   <stat code="rc3" name="Right Cervical Level III" count="1">10.0%</stat>
+   <stat code="lc4" name="Left Cervical Level IV" count="1">10.0%</stat>
+   <stat code="rc4" name="Right Cervical Level IV" count="1">10.0%</stat>
+   <stat code="lc5" name="Left Cervical Level V" count="1">10.0%</stat>
+   <stat code="lsc" name="Left Supraclavicular" count="1">10.0%</stat>
+</stats>

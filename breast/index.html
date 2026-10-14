@@ -1,0 +1,561 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML><HEAD><TITLE>Breast Lymphatic Drainage - Breast Region Selection Tool</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1"/>    
+<meta id="SiteTitle_Description" name="description" content="Predicting the spread of breast cancer and primary tumour location - as published in The Journal of Awesomeness"></meta>
+<meta id="SiteTitle_Keywords" name="keywords" content="Predicting the spread of breast cancer and primary tumour location - as published in The Journal of Awesomeness"></meta>
+
+<LINK 
+media=all href="style.css" type=text/css 
+rel=stylesheet>
+<META content="MSHTML 6.00.2900.2604" name=GENERATOR>
+
+<SCRIPT type="text/javascript" src="exampleutils.js"></script>
+<SCRIPT LANGUAGE="JavaScript">
+
+	   /**
+             * Handler for servers response to skin_element_?.xml request.
+             * stats are pulled from skin_element_?.xml and replace the
+             * contents of the DIV with id 'statsSection'.
+             */
+            function statsResponseHandler()
+            {
+			var mytable=document.getElementById("statistics")
+			//var pic = mytable.rows[9].cells[0].innerHTML
+			//while (mytable.rows.length>5){ 	//deletes all rows of a table apart from top
+				//mytable.deleteRow(2) 	//delete last row of contracting table
+				//mytable.deleteRow(7)
+			//}
+			 	//deletes all rows of a table apart from top
+
+        		var swappableSection = document.getElementById('statistics');
+        		var stats = req.responseXML.getElementsByTagName('stat');
+			for (var i=0; i<stats.length-1; i++){	    //add new rows with content to the end of a table
+				mytable.deleteRow(i+3)
+				var newrow = mytable.insertRow(i+3)
+				var cellname = newrow.insertCell(0) //insert new cells to row
+				var cellestimate = newrow.insertCell(1)
+				var cellCI = newrow.insertCell(2)
+                        	for(var j=0; j < stats.length-1; j++)
+                        	{
+                            		var statNode = stats.item(i);
+                            		if(statNode != null)
+
+						cellname.innerHTML = statNode.getAttribute('name')
+						cellestimate.innerHTML = "<center>" + statNode.getAttribute('estimate') + "</center>"
+						cellCI.innerHTML = "<center>" + statNode.getAttribute('CI') + "</center>"
+		    		}
+            		}
+				mytable.deleteRow(-1)
+				var newrow = mytable.insertRow(-1)
+				var cellname = newrow.insertCell(0) //insert new cells to row
+				var cellestimate = newrow.insertCell(1)
+				var cellCI = newrow.insertCell(2)
+					var statNode = stats.item(6);
+                            		if(statNode != null)
+
+						cellname.innerHTML = statNode.getAttribute('name')
+						cellestimate.innerHTML = "<center>" + statNode.getAttribute('estimate') + "</center>"
+						cellCI.innerHTML = "<center>" + statNode.getAttribute('CI') + "</center>"
+	    }
+
+            function statsResponseHandlerPrevalence()
+            {
+			var mytable=document.getElementById("statistics")
+			var spacg=document.getElementById("extras")
+			var pic = mytable.rows[9].cells[0].innerHTML
+			var drain = mytable.rows[1].cells[0].innerHTML
+			var node = mytable.rows[2].cells[0].innerHTML
+			var est = mytable.rows[2].cells[1].innerHTML
+			var CI = mytable.rows[2].cells[2].innerHTML
+			//while (mytable.rows.length>5){ 	//deletes all rows of a table apart from top
+				//mytable.deleteRow(2) 	//delete last row of contracting table
+				//mytable.deleteRow(7)
+			//}
+			 	//deletes all rows of a table apart from top
+
+        		var swappableSection = document.getElementById('statistics');
+        		var stats = req.responseXML.getElementsByTagName('stat');
+			for (var i=1; i<7; i++){
+				mytable.deleteRow(3)
+			}
+			mytable.deleteRow(-1)
+			for (var i=0; i<stats.length; i++){	    //add new rows with content to the end of a table
+				var newrow = mytable.insertRow(i+6)
+				var cellname = newrow.insertCell(0) //insert new cells to row
+				var cellestimate = newrow.insertCell(1)
+				var cellCI = newrow.insertCell(2)
+                        	for(var j=0; j < stats.length; j++)
+                        	{
+                            		var statNode = stats.item(i);
+                            		if(statNode != null)
+
+						cellname.innerHTML = statNode.getAttribute('name')
+						cellestimate.innerHTML = "<center>" + statNode.getAttribute('estimate') + "</center>"
+						cellCI.innerHTML = "<center>" + statNode.getAttribute('CI') + "</center>"
+		    		}
+            		}
+			//var cellname = mytable.cells[0]
+			//cellname.innerHTML = <STRONG>TUMOUR PREVALENCE STATISTICS:</STRONG>;
+			//mytable.cells[5] = document.createTextNode("TUMOUR PREVALENCE STATISTICS:");
+			//mytable.rows[0].cells[0].innerHTML="<STRONG>TUMOUR PREVALENCE STATISTICS:</STRONG>";
+			//mytable.rows[1].cells[0].innerHTML="Breast Region";
+			//mytable.rows[1].cells[0].innerHTML=mytable.rows[3].cells[0].innerHTML;
+			//mytable.rows[9].cells[0].innerHTML=pic;
+			//mytable.rows[9].cells[0].innerHTML.write('<th colspan=3><img src="spacer_green.gif" width="320" height="1"></th>');
+			//mytable.rows[9].cells[0].innerHTML = document.write('<th colspan=3><spacer_green width="320" height="1"></th>');// = spacer_green;
+			//mytable.rows[9].cells[0].innerHTML = spacg.rows[0].cells[0].innerHTML;
+			for (var i=0; i<3; i++){ mytable.deleteRow(1) }
+			stats_on = 0
+	    }
+
+            /*function statsResponseHandlerStatsOff()
+            {
+			var mytable=document.getElementById("statistics")
+        		var swappableSection = document.getElementById('statistics');
+        		var stats = req.responseXML.getElementsByTagName('stat');
+			//mytable.insertRow(1)
+			//mytable.insertRow(1)
+			//mytable.insertRow(1)
+			//mytable.rows[3].cells[0].innerHTML=pic;
+			for (var i=1; i<10; i++){
+				mytable.deleteRow(-1)
+			}
+			for (var i=0; i<stats.length-1; i++){	    //add new rows
+				var newrow = mytable.insertRow(i+3)
+				var cellname = newrow.insertCell(0) //insert new cells to row
+				var cellestimate = newrow.insertCell(1)
+				var cellCI = newrow.insertCell(2)
+                        	for(var j=0; j < stats.length-1; j++)
+                        	{
+                            		var statNode = stats.item(i);
+                            		if(statNode != null)
+
+						cellname.innerHTML = statNode.getAttribute('name')
+						cellestimate.innerHTML = "<center>" + statNode.getAttribute('estimate') + "</center>"
+						cellCI.innerHTML = "<center>" + statNode.getAttribute('CI') + "</center>"
+		    		}
+            		}
+				var newrow = mytable.insertRow(-1)
+				var cellname = newrow.insertCell(0) //insert new cells to row
+				var cellestimate = newrow.insertCell(1)
+				var cellCI = newrow.insertCell(2)
+					var statNode = stats.item(6);
+                            		if(statNode != null)
+
+						cellname.innerHTML = statNode.getAttribute('name')
+						cellestimate.innerHTML = "<center>" + statNode.getAttribute('estimate') + "</center>"
+						cellCI.innerHTML = "<center>" + statNode.getAttribute('CI') + "</center>"
+			//var cellname = mytable.cells[0]
+			//cellname.innerHTML = <STRONG>TUMOUR PREVALENCE STATISTICS:</STRONG>;
+			//mytable.cells[5] = document.createTextNode("TUMOUR PREVALENCE STATISTICS:");
+			//mytable.rows[0].cells[0].innerHTML="<STRONG>TUMOUR PREVALENCE STATISTICS:</STRONG>";
+			//mytable.rows[1].cells[0].innerHTML="Breast Region";
+			//mytable.rows[4].cells[0].innerHTML=mytable.rows[0].cells[0].innerHTML;
+			//mytable.rows[4].cells[0].innerHTML=pic;
+			stats_on = 1
+	    }*/
+
+            function statsResponseHandlerStatsOff()
+            {
+			var mytable=document.getElementById("statistics");
+        		var swappableSection = document.getElementById('statistics');
+        		var stats = req.responseXML.getElementsByTagName('stat');
+			var spacg = document.getElementById("extras");
+			//for (var i=0; i<3; i++){ mytable.insertRow(1) }
+			var newrow = mytable.insertRow(1);
+			var green = newrow.insertCell(0);
+			green.innerHTML = spacg.rows[2].cells[0].innerHTML;
+			green.colSpan = 3;
+			var newrow = mytable.insertRow(1);
+			for (var i=0; i<3; i++){
+				var nodeheader = newrow.insertCell(i);
+				nodeheader.innerHTML = "<STRONG>" + spacg.rows[1].cells[i].innerHTML + "</STRONG>";
+			}
+			var newrow = mytable.insertRow(1)
+			var drain = newrow.insertCell(0);
+			drain.innerHTML = spacg.rows[0].cells[0].innerHTML;
+			drain.colSpan = 3;
+			for (var i=1; i<10; i++){
+				mytable.deleteRow(-1)
+			}
+			for (var i=0; i<stats.length-1; i++){	    //add new rows
+				var newrow = mytable.insertRow(i+3)
+				var cellname = newrow.insertCell(0) //insert new cells to row
+				var cellestimate = newrow.insertCell(1)
+				var cellCI = newrow.insertCell(2)
+                        	for(var j=0; j < stats.length-1; j++)
+                        	{
+                            		var statNode = stats.item(i);
+                            		if(statNode != null)
+
+						cellname.innerHTML = statNode.getAttribute('name')
+						cellestimate.innerHTML = "<center>" + statNode.getAttribute('estimate') + "</center>"
+						cellCI.innerHTML = "<center>" + statNode.getAttribute('CI') + "</center>"
+		    		}
+            		}
+				var newrow = mytable.insertRow(-1)
+				var cellname = newrow.insertCell(0) //insert new cells to row
+				var cellestimate = newrow.insertCell(1)
+				var cellCI = newrow.insertCell(2)
+					var statNode = stats.item(6);
+                            		if(statNode != null)
+
+						cellname.innerHTML = statNode.getAttribute('name')
+						cellestimate.innerHTML = "<center>" + statNode.getAttribute('estimate') + "</center>"
+						cellCI.innerHTML = "<center>" + statNode.getAttribute('CI') + "</center>"
+			//var cellname = mytable.cells[0]
+			//cellname.innerHTML = <STRONG>TUMOUR PREVALENCE STATISTICS:</STRONG>;
+			//mytable.cells[5] = document.createTextNode("TUMOUR PREVALENCE STATISTICS:");
+			//mytable.rows[0].cells[0].innerHTML="<STRONG>TUMOUR PREVALENCE STATISTICS:</STRONG>";
+			//mytable.rows[1].cells[0].innerHTML="Breast Region";
+			//mytable.rows[4].cells[0].innerHTML=mytable.rows[0].cells[0].innerHTML;
+			//mytable.rows[4].cells[0].innerHTML=pic;
+			stats_on = 1
+	    }
+
+	var element = 490
+	var stats_on = 1
+	var curelement = 'O'
+
+	function displayTorsoImage(element) {
+		var torsoimage = document.getElementById("torsoimage")
+		torsoimage.src = element + ".jpg"
+		if (stats_on)
+		{
+			xmlGet(element + '.xml', statsResponseHandler)
+		} else {
+			xmlGet(element + '.xml', statsResponseHandlerStatsOff)
+		}
+		curelement = element
+	}
+	function displayPercentageImage(element) {
+		var torsoimage = document.getElementById("torsoimage")
+		torsoimage.src = "p" + element + ".jpg"
+		if (stats_on)
+		{
+			xmlGet(element + '.xml', statsResponseHandler)
+		} else {
+			xmlGet(element + '.xml', statsResponseHandlerStatsOff)
+		}
+		curelement = element
+	}
+	function changeImageNames() {
+		
+		if (stats_on)
+		{
+			xmlGet(curelement + '.xml', statsResponseHandler)
+		} else {
+			xmlGet(curelement + '.xml', statsResponseHandlerStatsOff)
+		}
+		document.getElementById("view_estimate").innerHTML = "Node field names"
+		var torsoimage = document.getElementById("torsoimage")
+		torsoimage.src = curelement + ".jpg"
+		torsoimage.useMap = "#TORSO_ELEMENT"
+	}
+
+	function changeImageValues() {
+
+		if (stats_on)
+		{
+			xmlGet(curelement + '.xml', statsResponseHandler)
+		} else {
+			xmlGet(curelement + '.xml', statsResponseHandlerStatsOff)
+		}
+		document.getElementById("view_estimate").innerHTML = "Drainage estimates"
+		var torsoimage = document.getElementById("torsoimage")
+		torsoimage.src = "p" + curelement + ".jpg"
+		torsoimage.useMap = "#PERC_ELEMENT"
+	}
+	function changeImageValuesPrevalence() {
+
+		document.getElementById("view_estimate").innerHTML = "Tumour Prevalence estimates"
+		var torsoimage = document.getElementById("torsoimage")
+		torsoimage.src = "pregO.jpg"
+		torsoimage.useMap = "#NULL"
+		if (stats_on)
+			xmlGet('regO.xml', statsResponseHandlerPrevalence)
+	}
+
+	function resetImage() {
+
+		document.getElementById("view_estimate").innerHTML = "Node field names"
+		var torsoimage = document.getElementById("torsoimage")
+		torsoimage.src = "O.jpg"
+		torsoimage.useMap = "#TORSO_ELEMENT"
+		curelement = 'O'
+		if (stats_on)
+		{
+			xmlGet('O.xml', statsResponseHandler)
+		} else {
+			xmlGet('O.xml', statsResponseHandlerStatsOff)
+		}
+	}
+
+</SCRIPT>
+
+<script type="text/javascript">
+
+//spacer_green = new Image()
+//spacer_green.src="spacer_green.gif"
+
+
+</script>
+
+</HEAD>
+
+<BODY>
+
+<DIV class=main>
+<DIV class=head>
+<a href="http://www.abi.auckland.ac.nz/uoa/" target="blank"><img name="ABI_logo" src="abi-logo-positive-rgb.png" height="80" BORDER=0 align="right"></a>
+<!--DIV class=companyname>PREDICTING THE SPREAD OF BREAST CANCER AND PRIMARY TUMOUR LOCATION</DIV-->
+<!--DIV class=companyname>PREDICTING THE SPREAD OF BREAST CANCER AND PRIMARY TUMOUR LOCATION</DIV-->
+<!--DIV class=companyname>STATISTICAL ANALYSIS AND VISUALISATION OF LYMPHATIC DRAINAGE PATTERNS IN THE
+BREAST</DIV-->
+<DIV class=companyname>Predicting lymphatic drainage patterns and primary tumour location in patients with breast cancer</DIV>
+<!--DIV class=companyname>PREDICTING LYMPHATIC DRAINAGE PATTERNS AND PRIMARY TUMOUR LOCATION IN PATIENTS WITH BREAST CANCER</DIV-->
+<!--DIV class=catchyphrase>as published in Breast Cancer Research 2010 Sep;8(9):806-12</DIV-->
+<DIV class=catchyphrase>Evan I Blumgart, Roger F Uren, Poul M F Nielsen, Martyn P Nash and Hayley M Reynolds</DIV>
+
+<DIV class=spacer>
+</DIV>
+</DIV>
+
+<DIV class=menu>
+<UL>
+
+
+</UL> 
+</DIV>
+
+<DIV class=contentTop></DIV>
+<DIV class=quotes></DIV>
+
+<DIV class=aboveContent>
+Researchers at the Auckland Bioengineering Institute (ABI) have mapped breast cancer
+lymphoscintigraphy (LS) data from the Royal Prince Alfred Hospital (RPAH) Medical Centre onto a 3D anatomically based computer model of the skin and lymph nodes. 
+This mapped data has enabled visualisation of the likely node fields for breast cancer metastasis.
+Data was mapped by <a href="http://www.abi.auckland.ac.nz/uoa/evan-blumgart" target="blank">Evan Blumgart</a> at the ABI, supervised by Dr Hayley Reynolds, Assoc Prof Poul Nielsen and Assoc Prof Martyn Nash. LS data from the RPAH Medical Centre is courtesy of Prof Roger Uren MD.<br>
+<br>
+<!--The mapped data can be viewed in two different displays. Click the 'Skin Selection Tool' option in the menubar above to view the potential sentinel lymph node fields
+by selecting different regions of skin. Alternatively, the 'Heat Map' option on the menubar shows various heat maps visualising the
+percentage likelihood that the skin will show lymphatic drainage to a specified node field.
+<br>
+<br>-->
+
+<STRONG>BREAST REGION SELECTION TOOL:</STRONG><br>
+Click on regions of the breast on the image below to display the potential sentinel lymph node fields that may receive breast cancer cells if the cancer has
+spread. The node field glyphs displayed are scaled in size according to the drainage probability, while the selected breast region is highlighted in red.
+The table of statistics details the percentage probabilities of drainage to each node field and tumour prevalence in the selected breast region along with 95% Bayesian confidence intervals (CIs) for these estimates.
+By default, the drainage probabilities from the entire breast are displayed. The primary tumour prevalences button allows for the viewing of the probabilities of a primary tumour in each of the breast regions. All percentage values on the model are rounded to 2 s.f.<br>
+<DIV class=spacer></DIV>
+
+</DIV>
+
+
+<table border="0" cellpadding="0" cellspacing="0">
+
+<tr>
+<td valign="top" align="center">
+<DIV class=content><center>
+<img name="image" SRC="O.jpg" width="451" height="378" BORDER=0 ALIGN="middle" ISMAP usemap="#TORSO_ELEMENT" id="torsoimage"></a></h4>
+<DIV class=spacer></DIV>
+<div ID="view_estimate">Node field names</div>
+<center>
+
+<DIV class=spacer></DIV>
+<DIV class=spacer></DIV>
+
+<!--/td-->
+
+<center>Toggle labels:
+<DIV></DIV>
+<input type=button value="Node Field Names" onClick="changeImageNames()">
+<input type=button value="Drainage Estimates" onClick="changeImageValues()">
+<input type=button value="Tumour Prevalences" onClick="changeImageValuesPrevalence()">
+<DIV class=spacer></DIV>
+<input type=button value="RESET TOOL" onClick="resetImage()">
+</center>
+
+</td>
+
+</DIV>
+
+<td valign="middle" align="left">
+<DIV class=content><center>
+<img name="image" SRC="scaleOrbsinv.jpg" width="80" height="161" BORDER=0 ALIGN="left"></a></h4>
+<DIV class=spacer></DIV>
+<center>
+
+<DIV class=spacer></DIV>
+<DIV class=spacer></DIV>
+
+</td>
+
+</DIV>
+
+<td valign="top" align="left">
+<DIV class=leftColumn style="align:center">
+
+<DIV class=spacer></DIV>
+<DIV class=spacer></DIV>
+<DIV class=spacerGreen></DIV>
+
+
+<table id="statistics" cellspacing="0" cellpadding="2" align="center">
+<tr>
+<th><img src="tableSpacer.gif" width="40" height="4"></th>
+<th><img src="tableSpacer.gif" width="140" height="4"></th>
+<th><img src="tableSpacer.gif" width="30" height="4"></th>
+</tr>
+<tr><td colspan=3><STRONG>DRAINAGE STATISTICS:</STRONG></td></tr>
+<!--DIV class=spacerGreen></DIV-->
+
+<tr>
+<th>Node Field<br><!--img src="tableSpacer.gif" width="40" height="1"--></th>
+<th><center>Estimate (%)</center><!--img src="tableSpacer.gif" width="170" height="1"--></th>
+<th><center>(95% CI)</center><!--img src="tableSpacer.gif" width="30" height="1"--></th>
+</tr>
+<tr>
+<td>Axilla</td>
+<td><center>98.2</center></td>
+<td><center>(97.6, 98.7)</center></td>
+</tr>
+<tr>
+<td>Internal Mammary</td>
+<td><center>35.3</center></td>
+<td><center>(33.4, 37.3)</center></td>
+</tr>
+<tr>
+<td>Supraclavicular</td>
+<td><center>3.1</center></td>
+<td><center>(2.4, 3.8)</center></td>
+</tr>
+<tr>
+<td>Infraclavicular</td>
+<td><center>1.7</center></td>
+<td><center>(1.2, 2.3)</center></td>
+</tr>
+<tr>
+<td>Interpectoral</td>
+<td><center>0.7</center></td>
+<td><center>(0.4, 1.1)</center></td>
+</tr>
+<tr>
+<td>Interval</td>
+<td><center>5.7</center></td>
+<td><center>(4.8, 6.7)</center></td>
+</tr>
+<tr>
+<th colspan=3><img src="spacer_green.gif" width="320" height="1"></th>
+</tr>
+<!--tr><td colspan=2><STRONG> ~ </STRONG></td></tr-->
+<tr><td colspan=3><STRONG>TUMOUR PREVALENCE STATISTICS:</STRONG></td></tr>
+<tr>
+<th>Breast Region<br><!--img src="tableSpacer.gif" width="40" height="1"--></th>
+<th><center>Estimate (%)</center><!--img src="tableSpacer.gif" width="170" height="1"--></th>
+<th><center>(95% CI)</center><!--img src="tableSpacer.gif" width="30" height="1"--></th>
+</tr>
+<tr>
+<td>Overall</td>
+<td><center>100</center></td>
+<td><center>(100, 100)</center></td>
+</tr>
+</table>
+
+<DIV class=spacer></DIV>
+<DIV class=spacerGreen></DIV>
+<DIV class=spacer></DIV>
+
+<DIV class=spacer></DIV>
+
+<br>
+
+</td>
+</tr>
+
+</table>
+
+<table id="extras" style="display:none;">
+<tr><td colspan=3><STRONG>DRAINAGE STATISTICS:</STRONG></td></tr>
+<tr>
+<th>Node Field<br><!--img src="tableSpacer.gif" width="40" height="1"--></th>
+<th><center>Estimate (%)</center><!--img src="tableSpacer.gif" width="170" height="1"--></th>
+<th><center>(95% CI)</center><!--img src="tableSpacer.gif" width="30" height="1"--></th>
+</tr>
+<tr>
+<th colspan=3><img src="spacer_green.gif" width="320" height="1"></th>
+</tr>
+</table>
+
+<DIV class=contentTop></DIV>
+
+<p>
+<center>
+<table border="0">
+<tr>
+<td><STRONG>VIEW LYMPHATIC DRAINAGE PATTERNS OF SKIN:</STRONG></td>
+<td><FORM METHOD="GET" ACTION="../index.html"><INPUT TYPE="submit" VALUE="Below the neck"></FORM></td>
+<td><FORM METHOD="GET" ACTION="../head/index.html"><INPUT TYPE="submit" VALUE="On the head & neck"></FORM></td>
+</tr>
+</table> 
+</center>
+<DIV class=spacer></DIV>
+</p>
+
+<center>
+<p>
+<b>Any questions or comments please email <a href="http://www.abi.auckland.ac.nz/uoa/hayley-reynolds" target="blank">Dr Hayley Reynolds</a> at <a href="mailto:h.reynolds@auckland.ac.nz">h.reynolds@auckland.ac.nz</a></b>
+</p>
+</center>
+<center>
+
+<DIV class=contentTop></DIV>
+<center>
+<DIV class=spacer></DIV>
+<!--<img src="images/all_logos.jpg">-->
+<!--a href="http://www.abi.auckland.ac.nz/"><img border="0" src="abi-logo-positive-rgb.png"></a-->
+<!--img src="all_logos_spacer.jpg"-->
+<a href="http://www.abi.auckland.ac.nz/uoa/" target="blank"><img border="0" src="abi-logo-positive-rgb.png" height="80" valign="top" align="center"></a>
+<img src="all_logos_spacer.jpg" width="30">
+<a href="http://www.rpahmedicalcentre.com.au/" target="blank"><img border="0" src="scc_logo.jpg" height="80" valign="top" align="center"></a>
+<DIV class=spacer></DIV>
+</center>
+</DIV>
+
+<map name="TORSO_ELEMENT">
+
+	<area shape="polygon" coords="157,200,142,174,161,168,178,173,166,200,157,200" href="javascript:displayTorsoImage('UIO')">
+	<area shape="polygon" coords="166,200,178,173,196,180,202,198,176,207,171,202,166,200" href="javascript:displayTorsoImage('UI')">
+	<area shape="polygon" coords="176,207,202,198,208,214,207,232,177,221,178,214,176,207" href="javascript:displayTorsoImage('ULI')">
+	<area shape="polygon" coords="177,221,207,232,192,247,178,255,166,229,171,226,177,221" href="javascript:displayTorsoImage('LI')">
+	<area shape="polygon" coords="166,229,178,255,161,258,142,255,156,229,166,229" href="javascript:displayTorsoImage('LOI')">
+	<area shape="polygon" coords="156,229,142,255,126,246,117,231,147,221,151,226,156,229" href="javascript:displayTorsoImage('LO')">
+	<area shape="polygon" coords="147,221,117,231,112,213,116,195,146,208,144,214,147,221" href="javascript:displayTorsoImage('ULO')">
+	<area shape="polygon" coords="146,208,116,195,125,181,142,174,157,200,150,202,146,208" href="javascript:displayTorsoImage('UO')">
+	<area shape="polygon" coords="150,202,171,202,178,214,171,226,151,226,144,214,150,202" href="javascript:displayTorsoImage('BN')">
+
+	<area shape="default" nohref>
+</map>
+
+<map name="PERC_ELEMENT">
+
+	<area shape="polygon" coords="157,200,142,174,161,168,178,173,166,200,157,200" href="javascript:displayPercentageImage('UIO')">
+	<area shape="polygon" coords="166,200,178,173,196,180,202,198,176,207,171,202,166,200" href="javascript:displayPercentageImage('UI')">
+	<area shape="polygon" coords="176,207,202,198,208,214,207,232,177,221,178,214,176,207" href="javascript:displayPercentageImage('ULI')">
+	<area shape="polygon" coords="177,221,207,232,192,247,178,255,166,229,171,226,177,221" href="javascript:displayPercentageImage('LI')">
+	<area shape="polygon" coords="166,229,178,255,161,258,142,255,156,229,166,229" href="javascript:displayPercentageImage('LOI')">
+	<area shape="polygon" coords="156,229,142,255,126,246,117,231,147,221,151,226,156,229" href="javascript:displayPercentageImage('LO')">
+	<area shape="polygon" coords="147,221,117,231,112,213,116,195,146,208,144,214,147,221" href="javascript:displayPercentageImage('ULO')">
+	<area shape="polygon" coords="146,208,116,195,125,181,142,174,157,200,150,202,146,208" href="javascript:displayPercentageImage('UO')">
+	<area shape="polygon" coords="150,202,171,202,178,214,171,226,151,226,144,214,150,202" href="javascript:displayPercentageImage('BN')">
+
+	<area shape="default" nohref>
+</map>
+
+<DIV class=footerMenu></DIV>
+
+<!--<DIV class=footer>Designed by <a href="http://www.getcsstemplates.com">Free CSS Templates</a> :: Copyright © 2007-->
+<BR></DIV>
+
+</BODY></HTML>

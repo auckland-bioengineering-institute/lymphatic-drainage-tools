@@ -1,0 +1,7 @@
+<stats>
+   <stat code="rc1" name="Right Cervical Level I" count="2">40.0%</stat>
+   <stat code="rc2" name="Right Cervical Level II" count="4">80.0%</stat>
+   <stat code="rc3" name="Right Cervical Level III" count="1">20.0%</stat>
+   <stat code="rc4" name="Right Cervical Level IV" count="1">20.0%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="1">20.0%</stat>
+</stats>

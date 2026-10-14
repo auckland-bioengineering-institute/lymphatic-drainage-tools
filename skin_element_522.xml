@@ -1,0 +1,7 @@
+<stats>
+   <stat code="la" name="Left Axilla" count="23">100.0%</stat>
+   <stat code="ra" name="Right Axilla" count="6">26.1%</stat>
+   <stat code="ltis" name="Left TIS*" count="1">4.3%</stat>
+   <stat code="lg" name="Left Groin" count="1">4.3%</stat>
+   <stat code="in" name="Interval Node" count="5">21.7%</stat>
+</stats>

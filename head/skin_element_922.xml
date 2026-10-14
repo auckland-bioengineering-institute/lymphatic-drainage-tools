@@ -1,0 +1,6 @@
+<stats>
+   <stat code="lc2" name="Left Cervical Level II" count="2">66.7%</stat>
+   <stat code="lc3" name="Left Cervical Level III" count="1">33.3%</stat>
+   <stat code="lc4" name="Left Cervical Level IV" count="1">33.3%</stat>
+   <stat code="lsc" name="Left Supraclavicular" count="1">33.3%</stat>
+</stats>

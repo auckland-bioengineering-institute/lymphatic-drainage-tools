@@ -1,0 +1,7 @@
+<stats>
+   <stat code="lc4" name="Left Cervical Level IV" count="1">50.0%</stat>
+   <stat code="rc4" name="Right Cervical Level IV" count="1">50.0%</stat>
+   <stat code="lc5" name="Left Cervical Level V" count="1">50.0%</stat>
+   <stat code="rc5" name="Right Cervical Level V" count="1">50.0%</stat>
+   <stat code="lsc" name="Left Supraclavicular" count="1">50.0%</stat>
+</stats>

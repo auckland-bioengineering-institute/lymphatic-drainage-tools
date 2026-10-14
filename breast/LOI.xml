@@ -1,0 +1,3 @@
+<stats>
+   <stat name="Axilla" estimate="98.3" CI="(95.3, 99.8)"></stat>
+ <stat name="Internal Mammary" estimate="48.7" CI="(39.8, 57.7)"></stat> <stat name="Supraclavicular" estimate="2.6" CI="(0.5, 6.1)"></stat> <stat name="Infraclavicular" estimate="0.9" CI="(0.0, 3.1)"></stat> <stat name="Interpectoral" estimate="0.9" CI="(0.0, 3.1)"></stat> <stat name="Interval" estimate="12.0" CI="(6.8, 18.4)"></stat> <stat name="Lower Outer Inner" estimate="5.0" CI="(4.2, 5.9)"></stat></stats>

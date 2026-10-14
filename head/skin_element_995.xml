@@ -1,0 +1,8 @@
+<stats>
+   <stat code="lprea" name="Left Preauricular" count="8">27.6%</stat>
+   <stat code="lposta" name="Left Postauricular" count="14">48.3%</stat>
+   <stat code="lc1" name="Left Cervical Level I" count="1">3.4%</stat>
+   <stat code="lc2" name="Left Cervical Level II" count="20">69.0%</stat>
+   <stat code="lc4" name="Left Cervical Level IV" count="1">3.4%</stat>
+   <stat code="lc5" name="Left Cervical Level V" count="2">6.9%</stat>
+</stats>
